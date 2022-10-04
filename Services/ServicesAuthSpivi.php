@@ -4,11 +4,10 @@ namespace Services;
 
 use Pest;
 use Controller\ControllerFuncoes;
-use ControllerAuth;
 
 class ServicesAuthSpivi{
-    private $pest;
-    private $funcoes;
+    private Pest $pest;
+    private ControllerFuncoes $funcoes;
 
     public function __construct(ControllerFuncoes $controllerFuncoes){
         $this->pest = new Pest('https://api.spivi.com');

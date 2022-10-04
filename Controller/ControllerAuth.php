@@ -9,16 +9,16 @@ use Model\Database;
 use Services\ServicesAuthSpivi;
 
 class ControllerAuth{
-    private $controller;
-    private $servicesAuthSpivi;
-    private $database;
+    private ServicesAuthSpivi $servicesAuthSpivi;
+    private Database $database;
 
     public function __construct(ServicesAuthSpivi $servicesAuthSpivi, Database $database){
         $this->servicesAuthSpivi = $servicesAuthSpivi;
         $this->database = $database;
     }
 
-    public function getCredentials($codUnidade = "00"){
+    public function getCredentials($codUnidade = "00"): string{
+        $this->database->connect();
         $credenciais = $this->database->select("TB_AUTH_SPIVI","*","COD_UNIDADE = ?",[$codUnidade]);
         $authSpivi = new AuthSpivi(
             $credenciais[0]['COD_UNIDADE'],
@@ -31,6 +31,9 @@ class ControllerAuth{
             $authSpivi->getPassword(),
             $authSpivi->getSiteId()
         );
-        return $pegaClientes; 
+
+        ob_start();
+        include __DIR__."/../View/index.php";
+        return ob_get_clean(); 
     }
 }

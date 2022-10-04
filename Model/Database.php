@@ -17,7 +17,7 @@ class Database
         $this->selectDB();
     }
 
-    private function selectDB()
+    private function selectDB(): void
     {
         if(strpos($this->marca,"ux") !== false){
             $this->setDbServer("200.98.205.240");
@@ -32,7 +32,7 @@ class Database
         }
     }
 
-    public function connect()
+    public function connect(): bool
     {
         if (empty($this->conn)) {
             $this->setConn(new \PDO("sqlsrv:Server=" . $this->dbServer . "; Database=" . $this->dbDatabase . "; ConnectionPooling=0;", "" . $this->dbUser . "", "" . $this->dbPassword . ""));
@@ -46,7 +46,7 @@ class Database
         }
     }
 
-    public function disconnect()
+    public function disconnect(): void
     {
         if ($this->getConn()) {
             $this->getConn()->query("KILL CONNECTION_ID()");

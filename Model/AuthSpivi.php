@@ -6,7 +6,7 @@ class AuthSpivi{
     private string $codUnidade;
     private string $sourceName;
     private string $password;
-    private string $siteId;
+    private int $siteId;
 
     public function __construct($codUnidade, $sourceName, $password, $siteId){
         $this->codUnidade = $codUnidade;
