@@ -2,46 +2,16 @@
 
 namespace Services;
 
-require_once(__DIR__."/../Model/AuthSpivi.php");
+require_once(__DIR__."/../Services/Spivi.php");
 
-use Model\AuthSpivi;
-use Pest;
 use Controller\ControllerFuncoes;
 use Model\Database;
+use Services\Spivi;
 
-
-class ServicesClienteSpivi{
-    private Pest $pest;
-    private ControllerFuncoes $funcoes;
-    private array $sourceCredentials;
-    private Database $database;
-    private AuthSpivi $authSpivi;
-
+class ServicesClienteSpivi extends Spivi{
 
     public function __construct(ControllerFuncoes $controllerFuncoes,Database $database, string $codUnidade){
-        $this->pest = new Pest('https://api.spivi.com');
-        $this->funcoes = $controllerFuncoes;
-
-        $this->database = $database;
-
-        if(!$this->database->connect()){
-            $this->database->connect();
-        };
-
-        $this->credenciais = $this->database->select("TB_AUTH_SPIVI","*","COD_UNIDADE = ?",[$codUnidade]);
-
-        $this->authSpivi = new AuthSpivi(
-            $this->credenciais[0]['COD_UNIDADE'],
-            $this->credenciais[0]['SOURCE_NAME'],
-            $this->credenciais[0]['PASSWORD'],
-            $this->credenciais[0]['SITE_ID']
-        );
-
-        $this->sourceCredentials = array(
-            "SourceName" => $this->authSpivi->getSourceName(),
-            "Password" => $this->authSpivi->getPassword(),
-            "SiteID" => $this->authSpivi->getSiteId()
-        );
+        parent::__construct($controllerFuncoes, $database, $codUnidade);
     }
 
     public function getClients($params) : object
@@ -51,9 +21,9 @@ class ServicesClienteSpivi{
             "SearchText" => $params
         ];
         
-        $request = array_merge(array("SourceCredentials"=>$this->sourceCredentials),$params);
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
         
-        $results = $this->funcoes->formataRetorno($this->pest->post('ClientService/GetClients',$request));
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/GetClients',$request));
         
         $clients = $results->Clients;
 

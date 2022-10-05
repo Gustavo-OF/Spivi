@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../View/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../View/css/usuarios.css?d=<?php echo uniqid() ?>" rel="stylesheet" type="text/css" />
-    <title>Usuários - Spivi</title>
+    <title>Clientes - Spivi</title>
 </head>
 
 <body>
     <div id="pesquisaUsuarios" class="card">
         <div class="card-header">
             <div class="pull-left">
-                <h6 class="panel-title txt-dark">Usuarios - Selfloops</h6>
+                <h6 class="panel-title txt-dark">Clientes - Selfloops</h6>
             </div>
             <div class="clearfix"></div>
         </div>

@@ -3,27 +3,15 @@
 namespace Route;
 
 use Controller\ControllerCliente;
-use Controller\ControllerFuncoes;
-use Model\Database;
-use Services\ServicesClienteSpivi;
 
 class Rotas
 {
-    private Database $database;
-    private ControllerFuncoes $controllerFuncoes;
-    private ServicesClienteSpivi $servicesClienteSpivi;
     private ControllerCliente $ControllerCliente;
 
     public function __construct(
-        Database $database, 
-        ControllerFuncoes $controllerFuncoes, 
-        ServicesClienteSpivi $servicesClienteSpivi, 
         ControllerCliente $ControllerCliente
     )
     {
-        $this->database = $database;
-        $this->controllerFuncoes = $controllerFuncoes;
-        $this->servicesClienteSpivi = $servicesClienteSpivi;
         $this->ControllerCliente = $ControllerCliente;
     }
 

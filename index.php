@@ -23,7 +23,7 @@ $database = new Database("ux");
 $controllerFuncoes = new ControllerFuncoes();
 $serviceClienteSpivi = new ServicesClienteSpivi($controllerFuncoes,$database,$codUnidade);
 $controllerCliente = new ControllerCliente($serviceClienteSpivi);
-$rotas = new Rotas($database,$controllerFuncoes,$serviceClienteSpivi,$controllerCliente);
+$rotas = new Rotas($controllerCliente);
 
 $rotas->abrir($_REQUEST);
 
