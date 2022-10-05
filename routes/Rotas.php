@@ -2,29 +2,29 @@
 
 namespace Route;
 
-use Controller\ControllerAuth;
+use Controller\ControllerCliente;
 use Controller\ControllerFuncoes;
 use Model\Database;
-use Services\ServicesAuthSpivi;
+use Services\ServicesClienteSpivi;
 
 class Rotas
 {
     private Database $database;
     private ControllerFuncoes $controllerFuncoes;
-    private ServicesAuthSpivi $servicesAuthSpivi;
-    private ControllerAuth $controllerAuth;
+    private ServicesClienteSpivi $servicesClienteSpivi;
+    private ControllerCliente $ControllerCliente;
 
     public function __construct(
         Database $database, 
         ControllerFuncoes $controllerFuncoes, 
-        ServicesAuthSpivi $servicesAuthSpivi, 
-        ControllerAuth $controllerAuth
+        ServicesClienteSpivi $servicesClienteSpivi, 
+        ControllerCliente $ControllerCliente
     )
     {
         $this->database = $database;
         $this->controllerFuncoes = $controllerFuncoes;
-        $this->servicesAuthSpivi = $servicesAuthSpivi;
-        $this->controllerAuth = $controllerAuth;
+        $this->servicesClienteSpivi = $servicesClienteSpivi;
+        $this->ControllerCliente = $ControllerCliente;
     }
 
     public function abrir($req)
@@ -37,13 +37,19 @@ class Rotas
         array_shift($url);
 
         $metodo = implode(" ", $url);
-
+        echo $classe." ".$metodo;
         switch($classe){
             case "index":
             case "Index":
             case "INDEX":
-                print_r($this->controllerAuth->getCredentials());
-                break;
+                switch ($metodo) {
+                    case 'usuarios':
+                        print_r($this->ControllerCliente->getClients());
+                        break;
+                    default:
+                        include_once __DIR__."/../view/index.php";
+                        break;
+                }                
         }
     }
 }
