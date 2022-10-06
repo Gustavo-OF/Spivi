@@ -26,7 +26,7 @@ abstract class Spivi{
             $this->database->connect();
         };
 
-        $this->credenciais = $this->database->select("TB_AUTH_SPIVI","*","COD_UNIDADE = ?",[$codUnidade]);
+        $this->credenciais = $this->database->select("TB_AUTH_SPIVI","*",[],"COD_UNIDADE = ?",[$codUnidade]);
 
         $this->authSpivi = new AuthSpivi(
             $this->credenciais[0]['COD_UNIDADE'],
@@ -40,6 +40,7 @@ abstract class Spivi{
             "Password" => $this->authSpivi->getPassword(),
             "SiteID" => $this->authSpivi->getSiteId()
         );
+        $this->database->disconnect();
     }
 
     /**

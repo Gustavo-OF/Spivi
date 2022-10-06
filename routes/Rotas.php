@@ -2,11 +2,13 @@
 
 namespace Route;
 
-use Controller\ControllerCliente;
+use Controller\ControllerClienteSpivi;
+use Controller\ControllerClienteUx;
 
 class Rotas
 {
-    private ControllerCliente $ControllerCliente;
+    private ControllerClienteSpivi $controllerClienteSpivi;
+    private ControllerClienteUx $controllerClienteUx;
     
     /**
      * Construtor
@@ -14,10 +16,12 @@ class Rotas
      * @return void
      */
     public function __construct(
-        ControllerCliente $ControllerCliente
+        ControllerClienteSpivi $controllerClienteSpivi,
+        ControllerClienteUx $controllerClienteUx
     )
     {
-        $this->ControllerCliente = $ControllerCliente;
+        $this->controllerClienteSpivi = $controllerClienteSpivi;
+        $this->controllerClienteUx = $controllerClienteUx;
     }
     
     /**
@@ -45,10 +49,13 @@ class Rotas
                     case 'usuarios':
                         switch($metodo){
                             case 'pesquisa_nome':
-                                echo $this->ControllerCliente->getClients($_GET['valor']);
+                                echo $this->controllerClienteSpivi->getClients($_GET['valor']);
                                 break;
                             case 'pesquisa_email':
                                 
+                                break;
+                            case 'pesquisa_aluno_ux':
+                                echo $this->controllerClienteUx->getClientsUx($_GET['valor'],$_GET['cod_unidade']);
                                 break;
                             default:
                                 include __DIR__."/../View/Clientes/index.php";

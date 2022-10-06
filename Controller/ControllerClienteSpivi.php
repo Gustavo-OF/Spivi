@@ -4,7 +4,7 @@ namespace Controller;
 
 use Services\ServicesClienteSpivi;
 
-class ControllerCliente{
+class ControllerClienteSpivi{
     private ServicesClienteSpivi $servicesClienteSpivi;
 
     public function __construct(ServicesClienteSpivi $servicesClienteSpivi){

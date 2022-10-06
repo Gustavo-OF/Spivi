@@ -7,10 +7,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="../View/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../View/css/clientes.css?d=<?php echo uniqid() ?>" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="../View/css/style_v2.css">
+	<link rel="stylesheet" href="../View/css/style_loader.css">
 	<title>Alunos - Spivi</title>
 </head>
 
 <body style="margin:1rem">
+	<input type="hidden" id="codUnidade" value=<?php echo isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "01";?>>
+	<div id="loading" name="loading" class="loading_b">
+		<div class="loader-wrapper">
+			<div class="loaderA">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+
+			<div id="loader2" class="loader">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+
+			<div id="loader3" class="loader">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+			<div class="img01">
+				<img src="../View/images/logoA.png" style="width:148px;" />
+			</div>
+			<div class="txt01">
+				Aguarde
+			</div>
+		</div>
+	</div>
 	<div id="pesquisaUsuarios" class="card">
 		<div class="card-header">
 			<div class="pull-left">
@@ -43,8 +70,8 @@
 
 	<div class="card table-responsive">
 		<div class="card-header headerResponsive">
-    		<h6 class="panel-title txt-dark">Alunos</h6>
-  		</div>
+			<h6 class="panel-title txt-dark">Alunos</h6>
+		</div>
 		<div class="card-body">
 			<table class="table table-hover" id="tabelaResultadoPesquisa">
 				<thead>
@@ -60,7 +87,7 @@
 					</tr>
 				</thead>
 				<tbody id="resultadoPesquisaCliente">
-					
+
 				</tbody>
 			</table>
 		</div>
@@ -72,20 +99,18 @@
 	<br />
 	<button type="button" id="botaoVoltaUsuarios" class="btn btn-primary" onclick="history.back()">Voltar</button>
 
-	<div class="modal fade" id="modalAdicionaUsuario" tabindex="-1" role="dialog" aria-labelledby="modalUsuario" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
+	<!-- Modal -->
+	<div class="modal fade" id="modalAdicionaUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h3 class="modal-title" id="modalConv">
-						<!-- <img width="40px" height="40px" src="images/convite.png"/> -->
-						<b>&nbsp; Adicionar usuário</b>
-					</h3>
+					<h5 class="modal-title" id="exampleModalLabel"><b>Adicionar aluno</b></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>
+				<p>
 					<h5>
-						Digite o nome, CPF ou o código do(a) aluno(a) que deseja adicionar em uma turma.
+						Digite o nome, CPF ou o código do(a) aluno(a) que deseja adicionar na Spivi.
 					</h5>
 					<br />
 					<br />
@@ -108,11 +133,10 @@
 						<table class="table table-hover" style="height:34%; display: none; width:100%;" id="tabela-convidado">
 							<thead>
 								<tr>
-									<th style="position: sticky; top:0">Foto</th>
-									<th style="position: sticky; top:0">Cód. Aluno</th>
-									<th style="position: sticky; top:0">Nome</th>
-									<th style="position: sticky; top:0">CPF</th>
-									<th style="position: sticky; top:0">Status</th>
+									<th scope="col">Cód. Aluno</th>
+									<th scope="col">Nome</th>
+									<th scope="col">CPF</th>
+									<th scope="col">Status</th>
 								</tr>
 							</thead>
 							<tbody id="corpo-tabela-convites"></tbody>
@@ -120,15 +144,17 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default close" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary" id="btnPesquisaAluno">Pesquisar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" id="btnPesquisaAluno">Procurar</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </body>
 <script type="text/javascript" src="../View/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../View/js/jquery-3.6.1.min.js?d=<?php echo uniqid() ?>"></script>
 <script type="text/javascript" src="../View/js/clientes.js?d=<?php echo uniqid() ?>"></script>
+<script type="text/javascript" src="../View/js/loader.js"></script>
 
 </html>

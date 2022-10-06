@@ -1,0 +1,198 @@
+/* 
+    Created on : 25/10/2016, 14:41:17
+    Author     : Emerson P Alves - PROJETO VENDAS
+*/
+body{
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+.botao{
+    width: 95%;
+    height: 60px;
+    /*background:rgba(83,201,223,0.8);*/
+    background: rgba(171, 72, 148,0.8);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    line-height: 60px;
+    /*margin-left: 2%;*/
+    text-align: center;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: rgba(255,255,255,1);
+    margin-bottom: 2px;
+    font-size: 250%;
+}
+.botao:hover{
+    /*background:rgba(83,201,223,1);*/
+    background: rgba(171, 72, 148,1);
+}
+.botao2{
+    width: 100%;
+    /*background:rgba(83,201,223,0.8);*/
+    background: #AAA;
+    text-align: center;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: rgba(255,255,255,1);
+    font-size: 15px;
+}
+.botao2:hover{
+    /*background:rgba(83,201,223,1);*/
+    background: rgba(171, 72, 148,1);
+}
+.botao33{
+    width: 100%;
+    /*background:rgba(83,201,223,0.8);*/
+    background: rgba(255,77,77,0.8);
+    text-align: center;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: rgba(255,255,255,1);
+    font-size: 15px;
+}
+.botao33:hover{
+    /*background:rgba(83,201,223,1);*/
+    background: rgba(255,77,77,1);
+}
+.botao333{
+    width: 100%;
+    /*background:rgba(83,201,223,0.8);*/
+    background: rgba(0,140,70,0.8);
+    text-align: center;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: rgba(255,255,255,1);
+    font-size: 15px;
+}
+.botao333:hover{
+    /*background:rgba(83,201,223,1);*/
+    background: rgba(0,140,70,1);
+}
+.botao3{
+    width: 95%;
+    height: 40px;
+    /*background:rgba(83,201,223,0.8);*/
+    background: rgba(171, 72, 148,0.8);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    margin-left: 2%;
+    text-align: center;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: rgba(255,255,255,1);
+    margin-bottom: 2px;
+    font-size: 30px;
+}
+.botao3:hover{
+    /*background:rgba(83,201,223,1);*/
+    background: rgba(171, 72, 148,1);
+}
+.window{
+    display:none;
+    width:500px;
+    height:230px;
+    position:absolute;
+    left:0;
+    top:0px;
+    background:#FFF;
+    z-index:9900;
+    padding:0px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+}
+ 
+#mascara{
+    display:none;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:9000;
+    background-color:rgba(0,0,0,0.8);
+}
+ 
+.fechar{display:block; text-align:right; color: #CCC; text-decoration: none; font-family:Tahoma, Geneva, sans-serif; padding-right: 10px;}
+.fechar2{color: #CCC; text-decoration: none; font-family:Tahoma, Geneva, sans-serif; position:absolute; right:10px;}
+
+.bcopiar{
+    /*background:rgba(83,201,223,0.8);*/
+    background: rgba(255,0,0,0.6);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: rgba(255,255,255,1);
+}
+.bcopiar:hover{
+    /*background:rgba(83,201,223,1);*/
+    background: rgba(255,0,0,1);
+}
+
+.bcopiar{
+    /*background:rgba(83,201,223,0.8);*/
+    background: rgba(255,0,0,0.6);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: rgba(255,255,255,1);
+}
+
+.parc{
+    font-family:Tahoma, Geneva, sans-serif;
+    color: #FFF;
+    background: rgba(136,136,136,1);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+.vparc{
+    font-size:25px;
+    font-family:Tahoma, Geneva, sans-serif;
+    color: #FFF;
+    background: rgba(171, 72, 148,1);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    text-align: center;
+}
+.Table{
+	border-collapse:collapse; border:1px solid #FFF;
+}
+.Table td{
+	border-collapse:collapse; border:1px solid #FFF;
+}
+.Table2{
+	border-collapse:collapse; border:0px solid #FFF;
+}
+.Table2 td{
+	border-collapse:collapse; border:0px solid #FFF;
+}
+
+
+::-webkit-input-placeholder {
+   color: white;
+   font: 20px Tahoma, Geneva, sans-serif;
+   padding-top: 40%;
+}
+
+:-moz-placeholder {
+   color: white;
+   font: 20px Tahoma, Geneva, sans-serif;
+   padding-top: 40%;
+}
+
+::-moz-placeholder {
+   color: white;  
+   font: 20px Tahoma, Geneva, sans-serif;
+   padding-top: 40%;
+}
+
+:-ms-input-placeholder {  
+   color: white;  
+   font: 20px Tahoma, Geneva, sans-serif;
+   padding-top: 40%;
+}
