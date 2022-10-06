@@ -2,9 +2,6 @@
 
 namespace Controller;
 
-require_once(__DIR__."/../Model/AuthSpivi.php");
-
-use Model\AuthSpivi;
 use Services\ServicesClienteSpivi;
 
 class ControllerCliente{
@@ -14,11 +11,9 @@ class ControllerCliente{
         $this->servicesClienteSpivi = $servicesClienteSpivi;        
     }
 
-    public function getClients(): string{
-        $pegaClientes = $this->servicesClienteSpivi->getClients($params = "Francis");
+    public function getClients($params): string{
+        $pegaClientes = $this->servicesClienteSpivi->getClients($params);
 
-        ob_start();
-        include __DIR__."/../View/Clientes/index.php";
-        return ob_get_clean(); 
+        return json_encode($pegaClientes);
     }
 }
