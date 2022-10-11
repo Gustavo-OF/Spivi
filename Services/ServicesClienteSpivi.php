@@ -16,7 +16,8 @@ class ServicesClienteSpivi extends Spivi{
 
     public function getClients($params) : object
     {
-        
+        $this->authSpivi();
+
         $params = [
             "SearchText" => $params
         ];
@@ -27,6 +28,8 @@ class ServicesClienteSpivi extends Spivi{
         
         $clients = $results->Clients;
 
+        $this->unsetSpivi();
+        
         return $clients;
     }
 }

@@ -9,38 +9,19 @@ use Pest;
 use Controller\ControllerFuncoes;
 use Model\Database;
 
-abstract class Spivi{
+class Spivi{
     private Pest $pest;
     private ControllerFuncoes $funcoes;
     private array $sourceCredentials;
     private Database $database;
     private AuthSpivi $authSpivi;
+    private string $codUnidade;
 
     public function __construct(ControllerFuncoes $controllerFuncoes,Database $database, string $codUnidade){
         $this->pest = new Pest('https://api.spivi.com');
         $this->funcoes = $controllerFuncoes;
-
         $this->database = $database;
-
-        if(!$this->database->connect()){
-            $this->database->connect();
-        };
-
-        $this->credenciais = $this->database->select("TB_AUTH_SPIVI","*",[],"COD_UNIDADE = ?",[$codUnidade]);
-
-        $this->authSpivi = new AuthSpivi(
-            $this->credenciais[0]['COD_UNIDADE'],
-            $this->credenciais[0]['SOURCE_NAME'],
-            $this->credenciais[0]['PASSWORD'],
-            $this->credenciais[0]['SITE_ID']
-        );
-
-        $this->sourceCredentials = array(
-            "SourceName" => $this->authSpivi->getSourceName(),
-            "Password" => $this->authSpivi->getPassword(),
-            "SiteID" => $this->authSpivi->getSiteId()
-        );
-        $this->database->disconnect();
+        $this->codUnidade = $codUnidade;
     }
 
     /**
@@ -65,6 +46,34 @@ abstract class Spivi{
     public function getSourceCredentials()
     {
         return $this->sourceCredentials;
+    }
+
+    protected function authSpivi(){
+        if(empty($this->authSpivi)){
+            if(!$this->database->connect()){
+                $this->database->connect();
+            };
+    
+            $this->credenciais = $this->database->select("TB_AUTH_SPIVI","*",[],"COD_UNIDADE = ?",[$this->codUnidade]);
+    
+            $this->authSpivi = new AuthSpivi(
+                $this->credenciais[0]['COD_UNIDADE'],
+                $this->credenciais[0]['SOURCE_NAME'],
+                $this->credenciais[0]['PASSWORD'],
+                $this->credenciais[0]['SITE_ID']
+            );
+    
+            $this->sourceCredentials = array(
+                "SourceName" => $this->authSpivi->getSourceName(),
+                "Password" => $this->authSpivi->getPassword(),
+                "SiteID" => $this->authSpivi->getSiteId()
+            );
+            $this->database->disconnect();
+        }
+    }
+
+    protected function unsetSpivi(){
+        unset($this->authSpivi);
     }
 }
 

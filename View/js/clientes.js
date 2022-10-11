@@ -63,7 +63,7 @@ $(document).ready(function () {
                             "<td>" + data[i].COD_ALUNO + "</td>" +
                             "<td>" + data[i].NOME_INICIAL + "<br/>" + data[i].NOME_FINAL + "</td>" +
                             "<td>" + data[i].CPF + "</td>" +
-                            "<td>" + data[i].ID_TIPO_PESSOAS + "</td>" +
+                            "<td>" + data[i].TIPO + "</td>" +
                             "</tr>"
                         );
                     }
