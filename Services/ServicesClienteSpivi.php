@@ -69,5 +69,41 @@ class ServicesClienteSpivi extends Spivi{
 
         return $results;
     }
+
+    public function updateClient(
+        $username, 
+        $password, 
+        $gender, 
+        $firstname, 
+        $lastname, 
+        $endereco, 
+        $cidade, 
+        $country,
+        $birthdate,
+        $celular
+    ) : object{
+        $this->authSpivi();
+
+        $params = [
+            "Username" => $username,
+            "Password" => $password,
+            "Gender" => $gender,
+            "FirstName" => $firstname,
+            "LastName" => $lastname,
+            "Address" => $this->getFuncoes()->remover_Injection($endereco),
+            "City" => $this->getFuncoes()->remover_Injection($cidade),
+            "Country" => $country,
+            "BirthDate" => $birthdate,
+            "Phone" => $celular
+        ];
+
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
+        
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/AddClient',$request));
+        
+        $this->unsetSpivi();
+
+        return $results;
+    }
 }
 ?>
