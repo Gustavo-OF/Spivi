@@ -14,7 +14,7 @@ class ServicesClienteSpivi extends Spivi{
         parent::__construct($controllerFuncoes, $database, $codUnidade);
     }
 
-    public function getClients($format,$params) : object
+    public function getClients(string $format, string $params) : object
     {
         $this->authSpivi();
 
@@ -71,16 +71,16 @@ class ServicesClienteSpivi extends Spivi{
     }
 
     public function updateClient(
-        $username, 
-        $password, 
-        $gender, 
-        $firstname, 
-        $lastname, 
-        $endereco, 
-        $cidade, 
-        $country,
-        $birthdate,
-        $celular
+       string $username, 
+       string $password, 
+       string $gender, 
+       string $firstname, 
+       string $lastname, 
+       string $endereco, 
+       string $cidade, 
+       string $country,
+       string $birthdate,
+       string $celular
     ) : object{
         $this->authSpivi();
 

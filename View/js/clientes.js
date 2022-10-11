@@ -178,7 +178,10 @@ $(document).ready(function () {
                         $("#sucesso").text(data.Message);
                     }
                     $("#div-sucesso").fadeIn("slow", function () {
-                        $("#div-sucesso").delay(3500).fadeOut('slow');
+                        $("#div-sucesso").delay(4000).fadeOut('slow',function(){
+                            // não rolou
+                            $("#modalConfirmaUsuario").modal("toggle");
+                        });
                     });
                 });
             },

@@ -11,19 +11,19 @@ class ControllerClienteSpivi{
         $this->servicesClienteSpivi = $servicesClienteSpivi;        
     }
 
-    public function getClientsByName($params): string{
+    public function getClientsByName(string $params): string{
         $pegaClientes = $this->servicesClienteSpivi->getClients("SearchText",$params);
 
         return json_encode($pegaClientes);
     }
 
-    public function getClientsByMail($params): string{
+    public function getClientsByMail(string $params): string{
         $pegaClientes = $this->servicesClienteSpivi->getClients("Username",$params);
 
         return json_encode($pegaClientes);
     }
 
-    public function insertNewClient($params) : string
+    public function insertNewClient(array $params) : string
     {
         $nomeSeparado = explode(" ",$params['nome']);
         $username = $params['email'];
