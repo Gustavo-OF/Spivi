@@ -23,13 +23,13 @@ $(document).ready(function () {
 
                             linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + data.Client[i].DisplayName + "</td><td class='text-center'>" + data.Client[i].Email + "</td><td class='text-center'>" + data.Client[i].LevelName + "</td>";
                             linha = linha.concat("<td class='text-center'>" + data.Client[i].FTP + " BPM</td><td class='text-center'>" + data.Client[i].LTHR + " BPM</td><td class='text-center'>" + data.Client[i].RHR + " BPM</td>");
-                            linha = linha.concat("<td class=text-center><img style='width:25px' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
+                            linha = linha.concat("<td class=text-center><img style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                             $("#tabelaResultadoPesquisa tbody").append(linha);
                         }
                     } else {
                         linha = "<tr><th scope='row' class='text-center'>1</th><td class='text-center'>" + data.Client.DisplayName + "</td><td class='text-center'>" + data.Client.Email + "</td><td class='text-center'>" + data.Client.LevelName + "</td>";
                         linha = linha.concat("<td class='text-center'>" + data.Client.FTP + " BPM</td><td class='text-center'>" + data.Client.LTHR + " BPM</td><td class='text-center'>" + data.Client.RHR + " BPM</td>");
-                        linha = linha.concat("<td class=text-center><img style='width:25px' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
+                        linha = linha.concat("<td class=text-center><img style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                         $("#tabelaResultadoPesquisa tbody").append(linha);
                     }
                     $("#divUsuariosDisponiveisPesquisa").show();

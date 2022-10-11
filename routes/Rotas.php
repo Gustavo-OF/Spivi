@@ -55,10 +55,10 @@ class Rotas
                     case 'usuarios':
                         switch($metodo){
                             case 'pesquisa_nome':
-                                echo $this->controllerClienteSpivi->getClients($_GET['valor']);
+                                echo $this->controllerClienteSpivi->getClientsByName($_GET['valor']);
                                 break;
                             case 'pesquisa_email':
-                                
+                                echo $this->controllerClienteSpivi->getClientsByMail($_GET['valor']);
                                 break;
                             case 'pesquisa_aluno_ux':
                                 echo $this->controllerClienteUx->getClientsUx($_GET['valor'],$_GET['cod_unidade']);

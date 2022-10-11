@@ -14,12 +14,12 @@ class ServicesClienteSpivi extends Spivi{
         parent::__construct($controllerFuncoes, $database, $codUnidade);
     }
 
-    public function getClients($params) : object
+    public function getClients($format,$params) : object
     {
         $this->authSpivi();
 
         $params = [
-            "SearchText" => $params
+            $format => $params
         ];
         
         $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);

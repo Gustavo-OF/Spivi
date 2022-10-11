@@ -133,11 +133,11 @@
 				</div>
 				<div class="modal-body">
 					<p>
-					<h5>
+					<label for="campoPesquisaAluno">
 						Digite o nome, CPF ou o código do(a) aluno(a) que deseja adicionar na Spivi.
-					</h5>
+					</label>
 					<br />
-					<br />
+					<br/>
 					<input type="text" id="campoPesquisaAluno" class="form-control" placeholder="Nome, CPF ou código do aluno(a)." />
 					</p>
 					<div class="alert alert-danger" id="div-erro" role="alert" style="display:none">
@@ -145,13 +145,9 @@
 					</div>
 					<div class="loader"></div>
 					<br />
-
 					<div class="alert alert-warning" id="div-not-found" style="display:none">
-						<b>Aluno(a) não encontrado na base. Deseja cadastrá-lo(a)?</b>
-						<br />
-						<br />
-						<button class="btn btn-default btn-danger" id="cancel-registration" style="width: 32%;margin-right:18%;margin-left:5%">Não</button>
-						<button class="btn btnUltra" id="proceed-registration" style="width: 32%;background-color:rgb(171, 72, 148);color:white">Sim</button>
+						<b>Aluno(a) não encontrado na base.</b>
+						<br/>
 					</div>
 					<div class="table-responsive">
 						<table class="table table-hover" style="height:34%; display: none; width:100%;" id="tabela-pesquisa">
@@ -215,7 +211,7 @@
 
 						<h5 id="cod_aluno_confirma"></h5>
 						<h5 id="nome_aluno_confirma"></h5>
-						<h5 id="email_aluno_confirma"></h5>
+						<h5 id="email_aluno_confirma" style="line-break: anywhere;"></h5>
 						<h5 id="cpf_aluno_confirma"></h5>
 						<h5 id="data_nasc_aluno_confirma"></h5>
 						<h5 id="plano_aluno_confirma"></h5>
