@@ -63,3 +63,22 @@ button:focus { outline:0 !important; }
 h5{
 	display: inline !important;
 }
+
+.confirma-inclusao{
+    display:grid;
+    justify-content:end;
+    float:right;
+}
+
+.btnUltra{
+    background-color: rgb(171, 72, 148);
+    color: white;
+    border-color: rgb(171, 72, 148);;
+}
+.btnUltra:hover{
+    background-color: rgb(179, 71, 153);
+}
+
+#div-sucesso{
+    display: none;
+}

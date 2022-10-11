@@ -13,7 +13,7 @@
 </head>
 
 <body style="margin:1rem">
-	<input type="hidden" id="codUnidade" value=<?php echo isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "01";?>>
+	<input type="hidden" id="codUnidade" value=<?php echo isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "00"; ?>>
 	<div id="loading" name="loading" class="loading_b">
 		<div class="loader-wrapper">
 			<div class="loaderA">
@@ -101,6 +101,30 @@
 
 	<!-- Modal -->
 	<div class="modal fade" id="modalAdicionaUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div id="loadingModel" name="loading" class="loading_b">
+		<div class="loader-wrapper">
+			<div class="loaderA">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+
+			<div id="loader2" class="loader">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+
+			<div id="loader3" class="loader">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+			<div class="img01">
+				<img src="../View/images/logoA.png" style="width:148px;" />
+			</div>
+			<div class="txt01">
+				Aguarde
+			</div>
+		</div>
+	</div>
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -108,7 +132,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-				<p>
+					<p>
 					<h5>
 						Digite o nome, CPF ou o código do(a) aluno(a) que deseja adicionar na Spivi.
 					</h5>
@@ -126,11 +150,11 @@
 						<b>Aluno(a) não encontrado na base. Deseja cadastrá-lo(a)?</b>
 						<br />
 						<br />
-						<button class="btn btn-default" id="cancel-registration" style="width: 32%;margin-right:18%;margin-left:5%">Não</button>
-						<button class="btn btnUltra" id="proceed-registration" style="width: 32%;">Sim</button>
+						<button class="btn btn-default btn-danger" id="cancel-registration" style="width: 32%;margin-right:18%;margin-left:5%">Não</button>
+						<button class="btn btnUltra" id="proceed-registration" style="width: 32%;background-color:rgb(171, 72, 148);color:white">Sim</button>
 					</div>
 					<div class="table-responsive">
-						<table class="table table-hover" style="height:34%; display: none; width:100%;" id="tabela-convidado">
+						<table class="table table-hover" style="height:34%; display: none; width:100%;" id="tabela-pesquisa">
 							<thead>
 								<tr>
 									<th scope="col">Cód. Aluno</th>
@@ -139,13 +163,75 @@
 									<th scope="col">Status</th>
 								</tr>
 							</thead>
-							<tbody id="corpo-tabela-convites"></tbody>
+							<tbody></tbody>
 						</table>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-					<button type="button" class="btn btn-primary" id="btnPesquisaAluno">Procurar</button>
+					<button type="button" class="btn btn-primary btnUltra" id="btnPesquisaAluno">Procurar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" data-keyboard="false" data-backdrop="static" id="modal-confirma-inclusao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmaInclusao">
+	<div id="loadingModel1" name="loading" class="loading_b">
+		<div class="loader-wrapper">
+			<div class="loaderA">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+
+			<div id="loader2" class="loader">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+
+			<div id="loader3" class="loader">
+				<div class="roller"></div>
+				<div class="roller"></div>
+			</div>
+			<div class="img01">
+				<img src="../View/images/logoA.png" style="width:148px;" />
+			</div>
+			<div class="txt01">
+				Aguarde
+			</div>
+		</div>
+	</div>
+		<div class="modal-dialog modal-lg" role="document" style="height: fit-content;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><b>Confirmar usuário</b></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<h2 style="text-align: center;display:none" id="label-confirma">Tem certeza que deseja inserir este aluno?</h2>
+					<br />
+					<br />
+					<div class="loader" id="loading-confirma-aluno" style="margin: 0; position: center"></div>
+					<img alt="imagem-aluno" id="foto-conf" style="max-width:200px; max-height: 200px;">
+					<div class="confirma-inclusao">
+
+						<h5 id="cod_aluno_confirma"></h5>
+						<h5 id="nome_aluno_confirma"></h5>
+						<h5 id="email_aluno_confirma"></h5>
+						<h5 id="cpf_aluno_confirma"></h5>
+						<h5 id="data_nasc_aluno_confirma"></h5>
+						<h5 id="plano_aluno_confirma"></h5>
+						
+						<input type="hidden" id="genero">
+						<input type="hidden" id="endereco">
+						<input type="hidden" id="cidade">
+						<input type="hidden" id="celular">
+					</div>
+				</div>
+				<div class="alert alert-warning" id="div-sucesso" role="alert">
+					<b id="sucesso"></b>
+				</div>
+				<div class="modal-footer" style="margin-top: 5%">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" href="#modalAdicionaUsuario">Voltar</button>
+					<button type="button" class="btn btnUltra" id="btn-aplica-insercao">Inserir</button>
 				</div>
 			</div>
 		</div>

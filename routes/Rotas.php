@@ -32,16 +32,22 @@ class Rotas
      */
     public function abrir($req)
     {
+        
         $json = file_get_contents('php://input');
         $obj = json_decode($json);
 
-        $url = explode("/", $req['url']);
+        if(isset($req['url'])){
+            $url = explode("/", $req['url']);    
+        }else{
+            $url = "";
+        }
 
         $index = isset($url[0]) ? $url[0] : "";
         $classe = isset($url[1]) ? $url[1] : "";
         $metodo = isset($url[2]) ? $url[2] : "";
         //echo $classe." ".$metodo;
         switch($index){
+            case "":
             case "index":
             case "Index":
             case "INDEX":
@@ -56,6 +62,9 @@ class Rotas
                                 break;
                             case 'pesquisa_aluno_ux':
                                 echo $this->controllerClienteUx->getClientsUx($_GET['valor'],$_GET['cod_unidade']);
+                                break;
+                            case 'insere_usuario_spivi':
+                                echo $this->controllerClienteSpivi->insertNewClient($_POST);
                                 break;
                             default:
                                 include __DIR__."/../View/Clientes/index.php";

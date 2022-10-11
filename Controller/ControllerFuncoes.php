@@ -55,7 +55,7 @@ class ControllerFuncoes{
 
 		
 		$string = preg_replace("/[][><}{)(:;,=!?*%~^`\'-]/", "", $string);
-		$string = preg_replace("/ /", "", $string);
+		//$string = preg_replace("/ /", "", $string);
 		return $string;
 	}
 }

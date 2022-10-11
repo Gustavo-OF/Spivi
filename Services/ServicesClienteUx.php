@@ -30,12 +30,12 @@ class ServicesClienteUx{
         if(!empty($pesquisa)){
             if(is_numeric($pesquisa)){
                 if(strlen($pesquisa) == 11){
-                    $retorno = $this->database->select("TB_PESSOAS P","COD_ALUNO, NOME, CPF, T.TIPO",["INNER","TB_TIPO_PESSOAS T","T.ID_TIPO_PESSOAS","P.ID_TIPO_PESSOAS"],"CPF = ?",[$pesquisa]);
+                    $retorno = $this->database->select("TB_PESSOAS P","COD_ALUNO,NOME,CPF,T.TIPO,DATA_NASC,PLVIG,EMAIL,SEXO,ENDERECO,CIDADE,CEL",["INNER","TB_TIPO_PESSOAS T","T.ID_TIPO_PESSOAS","P.ID_TIPO_PESSOAS"],"CPF = ?",[$pesquisa]);
                 }else{
-                    $retorno = $this->database->select("TB_PESSOAS P","COD_ALUNO, NOME, CPF, T.TIPO",["INNER","TB_TIPO_PESSOAS T","T.ID_TIPO_PESSOAS","P.ID_TIPO_PESSOAS"],"COD_ALUNO = ?",[$pesquisa]);
+                    $retorno = $this->database->select("TB_PESSOAS P","COD_ALUNO,NOME,CPF,T.TIPO,DATA_NASC,PLVIG, EMAIL,SEXO,ENDERECO,CIDADE,CEL",["INNER","TB_TIPO_PESSOAS T","T.ID_TIPO_PESSOAS","P.ID_TIPO_PESSOAS"],"COD_ALUNO = ?",[$pesquisa]);
                 }
             }else{
-                $retorno = $this->database->select("TB_PESSOAS P","COD_ALUNO, NOME, CPF, T.TIPO",["INNER","TB_TIPO_PESSOAS T","T.ID_TIPO_PESSOAS","P.ID_TIPO_PESSOAS"],"NOME LIKE ? AND LOJA_V = ?",["%".$pesquisa."%",$codUnidade]);
+                $retorno = $this->database->select("TB_PESSOAS P","COD_ALUNO,NOME,CPF,T.TIPO,DATA_NASC, PLVIG,EMAIL,SEXO,ENDERECO,CIDADE,CEL",["INNER","TB_TIPO_PESSOAS T","T.ID_TIPO_PESSOAS","P.ID_TIPO_PESSOAS"],"NOME LIKE ? AND LOJA_V = ?",["%".$pesquisa."%",$codUnidade]);
             }
         }
         $this->database->disconnect();
