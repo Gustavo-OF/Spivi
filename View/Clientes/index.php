@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<button type="button" id="botaoPesquisaUsuario" class="btn btn-primary">Buscar</button>
-			<button type="button" id="adicionaUsuario" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdicionaUsuario">+</button>
+			<button type="button" id="adicionaUsuario" class="btn btn-primary btnUltra" data-bs-toggle="modal" data-bs-target="#modalAdicionaUsuario">+</button>
 		</div>
 	</div>
 
@@ -99,32 +99,32 @@
 	<br />
 	<button type="button" id="botaoVoltaUsuarios" class="btn btn-primary" onclick="history.back()">Voltar</button>
 
-	<!-- Modal -->
+	<!-- Modal Pesquisa alunos -->
 	<div class="modal fade" id="modalAdicionaUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div id="loadingModel" name="loading" class="loading_b">
-		<div class="loader-wrapper">
-			<div class="loaderA">
-				<div class="roller"></div>
-				<div class="roller"></div>
-			</div>
+		<div id="loadingModel" name="loading" class="loading_b">
+			<div class="loader-wrapper">
+				<div class="loaderA">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
 
-			<div id="loader2" class="loader">
-				<div class="roller"></div>
-				<div class="roller"></div>
-			</div>
+				<div id="loader2" class="loader">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
 
-			<div id="loader3" class="loader">
-				<div class="roller"></div>
-				<div class="roller"></div>
-			</div>
-			<div class="img01">
-				<img src="../View/images/logoA.png" style="width:148px;" />
-			</div>
-			<div class="txt01">
-				Aguarde
+				<div id="loader3" class="loader">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
+				<div class="img01">
+					<img src="../View/images/logoA.png" style="width:148px;" />
+				</div>
+				<div class="txt01">
+					Aguarde
+				</div>
 			</div>
 		</div>
-	</div>
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -133,12 +133,12 @@
 				</div>
 				<div class="modal-body">
 					<p>
-					<label for="campoPesquisaAluno">
-						Digite o nome, CPF ou o código do(a) aluno(a) que deseja adicionar na Spivi.
-					</label>
-					<br />
-					<br/>
-					<input type="text" id="campoPesquisaAluno" class="form-control" placeholder="Nome, CPF ou código do aluno(a)." />
+						<label for="campoPesquisaAluno">
+							Digite o nome, CPF ou o código do(a) aluno(a) que deseja adicionar na Spivi.
+						</label>
+						<br />
+						<br />
+						<input type="text" id="campoPesquisaAluno" class="form-control" placeholder="Nome, CPF ou código do aluno(a)." />
 					</p>
 					<div class="alert alert-danger" id="div-erro" role="alert" style="display:none">
 						<b id="erro"></b>
@@ -147,7 +147,7 @@
 					<br />
 					<div class="alert alert-warning" id="div-not-found" style="display:none">
 						<b>Aluno(a) não encontrado na base.</b>
-						<br/>
+						<br />
 					</div>
 					<div class="table-responsive">
 						<table class="table table-hover" style="height:34%; display: none; width:100%;" id="tabela-pesquisa">
@@ -170,31 +170,34 @@
 			</div>
 		</div>
 	</div>
+	<!-- Fim Modal Pesquisa alunos -->
+
+	<!-- Modal Confirma aluno -->
 	<div class="modal fade" data-keyboard="false" data-backdrop="static" id="modal-confirma-inclusao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmaInclusao">
-	<div id="loadingModel1" name="loading" class="loading_b">
-		<div class="loader-wrapper">
-			<div class="loaderA">
-				<div class="roller"></div>
-				<div class="roller"></div>
-			</div>
+		<div id="loadingModel1" name="loading" class="loading_b">
+			<div class="loader-wrapper">
+				<div class="loaderA">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
 
-			<div id="loader2" class="loader">
-				<div class="roller"></div>
-				<div class="roller"></div>
-			</div>
+				<div id="loader2" class="loader">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
 
-			<div id="loader3" class="loader">
-				<div class="roller"></div>
-				<div class="roller"></div>
-			</div>
-			<div class="img01">
-				<img src="../View/images/logoA.png" style="width:148px;" />
-			</div>
-			<div class="txt01">
-				Aguarde
+				<div id="loader3" class="loader">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
+				<div class="img01">
+					<img src="../View/images/logoA.png" style="width:148px;" />
+				</div>
+				<div class="txt01">
+					Aguarde
+				</div>
 			</div>
 		</div>
-	</div>
 		<div class="modal-dialog modal-lg" role="document" style="height: fit-content;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -215,7 +218,7 @@
 						<h5 id="cpf_aluno_confirma"></h5>
 						<h5 id="data_nasc_aluno_confirma"></h5>
 						<h5 id="plano_aluno_confirma"></h5>
-						
+
 						<input type="hidden" id="genero">
 						<input type="hidden" id="endereco">
 						<input type="hidden" id="cidade">
@@ -232,6 +235,92 @@
 			</div>
 		</div>
 	</div>
+	<!-- Fim Modal Confirma alunos -->
+
+
+	<!-- Modal edita aluno -->
+	<div class="modal fade" data-keyboard="false" data-backdrop="static" id="modal-edita-aluno" tabindex="-1" role="dialog" aria-labelledby="modalEditaAluno">
+		<div id="loadingModel2" name="loading" class="loading_b">
+			<div class="loader-wrapper">
+				<div class="loaderA">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
+
+				<div id="loader2" class="loader">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
+
+				<div id="loader3" class="loader">
+					<div class="roller"></div>
+					<div class="roller"></div>
+				</div>
+				<div class="img01">
+					<img src="../View/images/logoA.png" style="width:148px;" />
+				</div>
+				<div class="txt01">
+					Aguarde
+				</div>
+			</div>
+		</div>
+		<div class="modal-dialog modal-lg" role="document" style="height: fit-content;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><b>Editar informações do aluno</b></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="div-edita">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-nome" name="spivi-nome">
+							<label for="spivi-nome">Nome</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-endereco" name="spivi-endereco">
+							<label for="spivi-endereco">Endereco</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="email" class="form-control" id="spivi-email" name="spivi-email">
+							<label for="spivi-email">Email</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" disabled class="form-control" id="spivi-level" name="spivi-level">
+							<label for="spivi-level">Level</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-ftp" name="spivi-ftp">
+							<label for="spivi-ftp">FTP</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-lthr" name="spivi-lthr">
+							<label for="spivi-lthr">LTHR</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-peso" name="spivi-peso">
+							<label for="spivi-peso">Peso (KG)</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-altura" name="spivi-altura">
+							<label for="spivi-altura">Altura (cm)</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-rhr" name="spivi-rhr">
+							<label for="spivi-rhr">RHR</label>
+						</div>
+						<div class="form-floating">
+							<input type="text" class="form-control" id="spivi-pst" name="spivi-pst">
+							<label for="spivi-pst">PST</label>
+						</div>
+					</div>
+					<div class="modal-footer" style="margin-top: 5%">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btnUltra" id="btn-aplica-atualizacao" disabled>Atualizar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Fim modal edita aluno -->
 
 </body>
 <script type="text/javascript" src="../View/js/bootstrap.bundle.min.js"></script>

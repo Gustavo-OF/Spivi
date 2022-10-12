@@ -24,8 +24,6 @@ button:focus { outline:0 !important; }
 #adicionaUsuario{
     float: right;
     margin-top: 1rem;
-    background: rgb(171, 72, 148);
-    border: rgb(171, 72, 148);
 }
 
 #botaoVoltaUsuarios{
@@ -73,12 +71,24 @@ h5{
 .btnUltra{
     background-color: rgb(171, 72, 148);
     color: white;
-    border-color: rgb(171, 72, 148);;
+    border-color: rgb(171, 72, 148);
 }
 .btnUltra:hover{
-    background-color: rgb(179, 71, 153);
+    background-color: rgb(192, 94, 169) !important;
+    border-color: rgb(192, 94, 169) !important;
+    color: white !important;
+}
+
+.btnUltra:disabled{
+    background-color: rgb(171, 72, 148);
+    color: white;
+    border-color: rgb(171, 72, 148);
 }
 
 #div-sucesso{
     display: none;
+}
+
+.div-edita{
+    column-count: 2;
 }

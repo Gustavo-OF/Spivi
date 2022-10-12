@@ -23,13 +23,13 @@ $(document).ready(function () {
 
                             linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + data.Client[i].DisplayName + "</td><td class='text-center'>" + data.Client[i].Email + "</td><td class='text-center'>" + data.Client[i].LevelName + "</td>";
                             linha = linha.concat("<td class='text-center'>" + data.Client[i].FTP + " BPM</td><td class='text-center'>" + data.Client[i].LTHR + " BPM</td><td class='text-center'>" + data.Client[i].RHR + " BPM</td>");
-                            linha = linha.concat("<td class=text-center><img style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
+                            linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client[i].Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                             $("#tabelaResultadoPesquisa tbody").append(linha);
                         }
                     } else {
                         linha = "<tr><th scope='row' class='text-center'>1</th><td class='text-center'>" + data.Client.DisplayName + "</td><td class='text-center'>" + data.Client.Email + "</td><td class='text-center'>" + data.Client.LevelName + "</td>";
                         linha = linha.concat("<td class='text-center'>" + data.Client.FTP + " BPM</td><td class='text-center'>" + data.Client.LTHR + " BPM</td><td class='text-center'>" + data.Client.RHR + " BPM</td>");
-                        linha = linha.concat("<td class=text-center><img style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
+                        linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client[i].Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                         $("#tabelaResultadoPesquisa tbody").append(linha);
                     }
                     $("#divUsuariosDisponiveisPesquisa").show();
@@ -169,10 +169,9 @@ $(document).ready(function () {
             },
             success: function (data) {
                 data = JSON.parse(data);
-                console.log(data.Code);
                 document.getElementById("loadingModel1").className = "loading_b";
                 $("#div-sucesso").show(function () {
-                    if(data.Code[0] != 200){
+                    if(data.Code[0]){
                         $("#sucesso").text(data.Message[0]+" Ajuste no perfil do aluno.");
                     }else{
                         $("#sucesso").text(data.Message);
@@ -190,6 +189,41 @@ $(document).ready(function () {
                 console.log(xhr.responseText);
             }
         })
+    });
 
+    $("#modal-edita-aluno").on("show.bs.modal",function(e){
+        let email = $(e.relatedTarget).data('value');
+        $.ajax({
+            url: 'usuarios/pesquisa_email',
+            type: 'GET',
+            data:{
+                valor: email
+            },
+            beforeSend: function () {
+                document.getElementById("loadingModel2").className = "loading_v";
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                $("#spivi-nome").val(data.Client.DisplayName);
+                $("#spivi-endereco").val(data.Client.Address ? data.Client.Address : "");
+                $("#spivi-email").val(data.Client.Email);
+                $("#spivi-level").val(data.Client.LevelName);
+                $("#spivi-ftp").val(data.Client.FTP);
+                $("#spivi-lthr").val(data.Client.LTHR);
+                $("#spivi-peso").val(data.Client.Weight);
+                $("#spivi-altura").val(data.Client.Height);
+                $("#spivi-rhr").val(data.Client.RHR);
+                $("#spivi-pst").val(data.Client.PST);
+                document.getElementById("loadingModel2").className = "loading_b";
+            },
+            error: function (xhr, status, error) {
+                document.getElementById("loadingModel2").className = "loading_b";
+                console.log(xhr.responseText);
+            }
+        })
+    });
+
+    $( "input[name^='spivi']").change(function(){
+        $("#btn-aplica-atualizacao").attr("disabled",false);
     });
 });
