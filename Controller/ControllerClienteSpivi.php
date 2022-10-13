@@ -50,4 +50,41 @@ class ControllerClienteSpivi{
             return json_encode(["Code" => 200, "Message" => "Aluno inserido com sucesso"]);
         }   
     }
+
+    public function updateClient(array $params): string{
+        $nomeSeparado = explode(" ",$params['nome']);
+        $username = $params['email'];
+        $firstname = $nomeSeparado[0];
+        $lastname = $nomeSeparado[1];
+        $endereco = $params['endereco'];
+        $cidade = $params['cidade'];
+        $celular = $params['celular'];
+        $peso = $params['peso'];
+        $altura = $params['altura'];
+        $ftp = $params['FTP'];
+        $rhr = $params['RHR'];
+        $pst = $params['PST'];
+        $lthr = $params['LTHR'];
+
+        $atualizaCliente = $this->servicesClienteSpivi->updateClient(
+            $username,$firstname,$lastname,$endereco,$cidade,
+            $celular,$peso,$altura,$ftp,$rhr,$pst,
+            $lthr
+        );
+
+        if($atualizaCliente->ErrorCode != 200){
+            return json_encode(["Code" => $atualizaCliente->ErrorCode,"Message"=> $atualizaCliente->Clients->message]);
+        }else{
+            return json_encode(["Code" => 200, "Message" => "Aluno atualizado com sucesso."]);
+        } 
+    }
+
+    public function deleteClient($params)
+    {
+        $email = $params['email'];
+
+        $deletaCliente = $this->servicesClienteSpivi->deleteClient($email);
+
+        return json_encode(["Code" => 200, "Message" => "Aluno deletado com sucesso."]);
+    }
 }

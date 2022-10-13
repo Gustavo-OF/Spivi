@@ -66,6 +66,12 @@ class Rotas
                             case 'insere_usuario_spivi':
                                 echo $this->controllerClienteSpivi->insertNewClient($_POST);
                                 break;
+                            case 'atualiza_aluno':
+                                echo $this->controllerClienteSpivi->updateClient($_POST);
+                            break;
+                            case 'deleta_aluno':
+                                echo $this->controllerClienteSpivi->deleteClient($_POST);
+                            break;
                             default:
                                 include __DIR__."/../View/Clientes/index.php";
                                 break;

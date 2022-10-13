@@ -72,34 +72,54 @@ class ServicesClienteSpivi extends Spivi{
 
     public function updateClient(
        string $username, 
-       string $password, 
-       string $gender, 
        string $firstname, 
        string $lastname, 
        string $endereco, 
        string $cidade, 
-       string $country,
-       string $birthdate,
-       string $celular
+       string $celular,
+       int $peso,
+       int $altura,
+       int $ftp,
+       int $rhr,
+       int $pst,
+       int $lthr
     ) : object{
         $this->authSpivi();
 
         $params = [
             "Username" => $username,
-            "Password" => $password,
-            "Gender" => $gender,
             "FirstName" => $firstname,
             "LastName" => $lastname,
             "Address" => $this->getFuncoes()->remover_Injection($endereco),
             "City" => $this->getFuncoes()->remover_Injection($cidade),
-            "Country" => $country,
-            "BirthDate" => $birthdate,
-            "Phone" => $celular
+            "Phone" => $celular,
+            "Weight" => $peso,
+            "Height" => $altura,
+            "FTP" => $ftp,
+            "RHR" => $rhr,
+            "PST" => $pst,
+            "LTHR" => $lthr
         ];
 
         $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
         
-        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/AddClient',$request));
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/UpdateClient',$request));
+        
+        $this->unsetSpivi();
+
+        return $results;
+    }
+
+    public function deleteClient($email){
+        $this->authSpivi();
+
+        $params = [
+            "Username" => $email
+        ];
+
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
+        
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/DelClient',$request));
         
         $this->unsetSpivi();
 

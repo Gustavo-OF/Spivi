@@ -134,11 +134,13 @@
 				<div class="modal-body">
 					<p>
 						<label for="campoPesquisaAluno">
-							Digite o nome, CPF ou o código do(a) aluno(a) que deseja adicionar na Spivi.
+							Digite o nome, CPF ou o código do aluno que deseja adicionar no Spivi.
 						</label>
 						<br />
-						<br />
-						<input type="text" id="campoPesquisaAluno" class="form-control" placeholder="Nome, CPF ou código do aluno(a)." />
+						<div class="form-floating mb-3">
+						<input type="text" id="campoPesquisaAluno" class="form-control" />
+							<label for="campoPesquisaAluno">Nome, CPF ou código do aluno.</label>
+						</div>
 					</p>
 					<div class="alert alert-danger" id="div-erro" role="alert" style="display:none">
 						<b id="erro"></b>
@@ -165,7 +167,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-					<button type="button" class="btn btn-primary btnUltra" id="btnPesquisaAluno">Procurar</button>
+					<button type="button" class="btn btn-primary btnUltra" id="btnPesquisaAluno" disabled>Procurar</button>
 				</div>
 			</div>
 		</div>
@@ -225,8 +227,8 @@
 						<input type="hidden" id="celular">
 					</div>
 				</div>
-				<div class="alert alert-warning" id="div-sucesso" role="alert">
-					<b id="sucesso"></b>
+				<div class="alert alert-warning div-retorno" role="alert">
+					<b class="mensagem-retorno"></b>
 				</div>
 				<div class="modal-footer" style="margin-top: 5%">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" href="#modalAdicionaUsuario">Voltar</button>
@@ -281,7 +283,15 @@
 							<label for="spivi-endereco">Endereco</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="email" class="form-control" id="spivi-email" name="spivi-email">
+							<input type="text" class="form-control" id="spivi-cidade" name="spivi-cidade">
+							<label for="spivi-cidade">Cidade</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="spivi-cel" name="spivi-cel">
+							<label for="spivi-cel">Celular</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="email" class="form-control" id="spivi-email" name="spivi-email" disabled>
 							<label for="spivi-email">Email</label>
 						</div>
 						<div class="form-floating mb-3">
@@ -297,11 +307,11 @@
 							<label for="spivi-lthr">LTHR</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-peso" name="spivi-peso">
+							<input type="number" class="form-control" id="spivi-peso" name="spivi-peso">
 							<label for="spivi-peso">Peso (KG)</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-altura" name="spivi-altura">
+							<input type="number" class="form-control" id="spivi-altura" name="spivi-altura">
 							<label for="spivi-altura">Altura (cm)</label>
 						</div>
 						<div class="form-floating mb-3">
@@ -313,8 +323,15 @@
 							<label for="spivi-pst">PST</label>
 						</div>
 					</div>
-					<div class="modal-footer" style="margin-top: 5%">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<!-- <div class="form-floating mb-3">
+						<textarea class="form-control" id="spivi-anotacoes" rows="3"></textarea>
+						<label for="spivi-anotacoes">Anotações</label>
+					</div> -->
+					<div class="alert alert-warning div-retorno" role="alert">
+						<b class="mensagem-retorno"></b>
+					</div>
+					<div class="modal-footer mt-1 d-flex justify-content-between" style="padding-left: 0;padding-right:0">
+						<button type="button" class="btn btn-danger" id="deleta-cliente">Excluir aluno</button>
 						<button type="button" class="btn btnUltra" id="btn-aplica-atualizacao" disabled>Atualizar</button>
 					</div>
 				</div>
