@@ -1,4 +1,19 @@
 $(document).ready(function () {
+    $("#pesquisaNomeUsuario").keyup(function(){
+        if($(this).val().length > 0){
+            $("#pesquisaEmailUsuario").attr("disabled",true);
+        }else{
+            $("#pesquisaEmailUsuario").attr("disabled",false);
+        }
+    });
+    $("#pesquisaEmailUsuario").keyup(function(){
+        if($(this).val().length > 0){
+            $("#pesquisaNomeUsuario").attr("disabled",true);
+        }else{
+            $("#pesquisaNomeUsuario").attr("disabled",false);
+        }
+    });
+
     $("#botaoPesquisaUsuario").click(function () {
         $("#tabelaResultadoPesquisa tbody").html("");
         let tipo = $("#pesquisaEmailUsuario").val().length > 0 ? 1 : 0;
@@ -218,6 +233,7 @@ $(document).ready(function () {
                 $("#spivi-email").val(data.Client.Email);
                 $("#spivi-level").val(data.Client.LevelName);
                 $("#spivi-level").css("background-color",cor)
+                $("#spivi-level").css("border-color",cor)
                 $("#spivi-ftp").val(data.Client.FTP);
                 $("#spivi-lthr").val(data.Client.LTHR);
                 $("#spivi-peso").val(data.Client.Weight);

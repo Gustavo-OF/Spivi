@@ -47,13 +47,13 @@
 		</div>
 		<div class="card-body">
 			<div class="row">
-				<div class="col-md-6">
-					<label for="pesquisaNomeUsuario">Pesquisar por nome:</label>
+				<div class="form-floating col-md-6">
 					<input class="form-control w-75" type="text" id="pesquisaNomeUsuario" value="" />
+					<label for="pesquisaNomeUsuario">&nbsp;Nome do aluno:</label>
 				</div>
-				<div class="col-md-6">
-					<label for="pesquisaEmailUsuario">Pesquisar por Email:</label>
+				<div class="form-floating col-md-6">
 					<input class="form-control w-75" type="text" id="pesquisaEmailUsuario" value="" />
+					<label for="pesquisaEmailUsuario">&nbsp;Email do aluno:</label>
 				</div>
 			</div>
 			<button type="button" id="botaoPesquisaUsuario" class="btn btn-primary">Buscar</button>

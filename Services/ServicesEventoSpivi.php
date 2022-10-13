@@ -2,37 +2,31 @@
 
 namespace Services;
 
-use Pest;
+require_once(__DIR__."/../Services/Spivi.php");
+
 use Controller\ControllerFuncoes;
+use Model\Database;
+use Services\Spivi;
 
-class ServicesAuthSpivi{
-    private Pest $pest;
-    private ControllerFuncoes $funcoes;
+class ServicesEventoSpivi extends Spivi{
 
-    public function __construct(ControllerFuncoes $controllerFuncoes){
-        $this->pest = new Pest('https://api.spivi.com');
-        $this->funcoes = $controllerFuncoes;
+    public function __construct(ControllerFuncoes $controllerFuncoes,Database $database, string $codUnidade){
+        parent::__construct($controllerFuncoes, $database, $codUnidade);
     }
 
-    public function auth($sourceName, $password, $siteId) : object
+    public function getEvents() : object
     {
-        $sourceCredentials = array(
-            "SourceName" => $sourceName,
-            "Password" => $password,
-            "SiteID" => $siteId
-        );
-        
-        $params = [
-            "SearchText" => "Francis"
-        ];
-        
-        $request = array_merge(array("SourceCredentials"=>$sourceCredentials),$params);
-        
-        $results = $this->funcoes->formataRetorno($this->pest->post('ClientService/GetClients',$request));
-        
-        $clients = $results->Clients;
+        $this->authSpivi();
 
-        return $clients;
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()));
+        
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('EventService/GetEvents',$request));
+
+        $events = $results->Events;
+
+        $this->unsetSpivi();
+
+        return $events;
     }
 }
 ?>

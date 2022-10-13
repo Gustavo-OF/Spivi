@@ -5,6 +5,7 @@ namespace Services;
 require_once(__DIR__."/../Services/Spivi.php");
 
 use Controller\ControllerFuncoes;
+use DateTime;
 use Model\Database;
 use Services\Spivi;
 
@@ -110,7 +111,7 @@ class ServicesClienteSpivi extends Spivi{
         return $results;
     }
 
-    public function deleteClient($email){
+    public function deleteClient(string $email){
         $this->authSpivi();
 
         $params = [
@@ -124,6 +125,34 @@ class ServicesClienteSpivi extends Spivi{
         $this->unsetSpivi();
 
         return $results;
+    }
+
+    public function getPerformanceDataClient(
+        string $usernamme,
+        DateTime $dataInicio,
+        DateTime $dataFim,
+        int $idEvento
+    )
+    {
+        $this->authSpivi();
+
+        $params = [
+            "Username" => $usernamme,
+            "StartDateTime" => $dataInicio->format('d-m-Y')."T00:00",
+            "EndDateTime" => $dataFim->format('d-m-Y')."T23:59",
+        ];
+
+        $idEvento != 0 ? $params["EventID"] = $idEvento : "";
+
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
+        
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/GetClientPerformanceData',$request));
+        
+        $performanceData = $results->Workouts;
+
+        $this->unsetSpivi();
+
+        return $performanceData;
     }
 }
 ?>

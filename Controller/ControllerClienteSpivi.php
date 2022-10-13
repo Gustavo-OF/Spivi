@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use DateTime;
 use Services\ServicesClienteSpivi;
 
 class ControllerClienteSpivi{
@@ -79,12 +80,23 @@ class ControllerClienteSpivi{
         } 
     }
 
-    public function deleteClient($params)
+    public function deleteClient(array $params)
     {
         $email = $params['email'];
 
         $deletaCliente = $this->servicesClienteSpivi->deleteClient($email);
 
         return json_encode(["Code" => 200, "Message" => "Aluno deletado com sucesso."]);
+    }
+    
+    public function getPerformanceDataClient(array $params){
+        $username = $params['email'];
+        $dataInicio = new DateTime($params['data_inicio']);
+        $dataFim = new DateTime($params['data_fim']);
+        $idEvento = $params['idEvento'];
+
+        $performanceData = $this->servicesClienteSpivi->getPerformanceDataClient($username, $dataInicio, $dataFim, $idEvento);
+
+        return json_encode($performanceData);
     }
 }

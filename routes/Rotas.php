@@ -4,11 +4,13 @@ namespace Route;
 
 use Controller\ControllerClienteSpivi;
 use Controller\ControllerClienteUx;
+use Controller\ControllerEventoSpivi;
 
 class Rotas
 {
     private ControllerClienteSpivi $controllerClienteSpivi;
     private ControllerClienteUx $controllerClienteUx;
+    private ControllerEventoSpivi $controllerEventoSpivi;
     
     /**
      * Construtor
@@ -17,11 +19,13 @@ class Rotas
      */
     public function __construct(
         ControllerClienteSpivi $controllerClienteSpivi,
-        ControllerClienteUx $controllerClienteUx
+        ControllerClienteUx $controllerClienteUx,
+        ControllerEventoSpivi $controllerEventoSpivi
     )
     {
         $this->controllerClienteSpivi = $controllerClienteSpivi;
         $this->controllerClienteUx = $controllerClienteUx;
+        $this->controllerEventoSpivi = $controllerEventoSpivi;
     }
     
     /**
@@ -32,6 +36,7 @@ class Rotas
      */
     public function abrir($req)
     {
+        // em producao dar explode no script_url
         
         $json = file_get_contents('php://input');
         $obj = json_decode($json);
@@ -72,10 +77,28 @@ class Rotas
                             case 'deleta_aluno':
                                 echo $this->controllerClienteSpivi->deleteClient($_POST);
                             break;
+                            case 'pesquisa_performance':
+                                echo $this->controllerClienteSpivi->getPerformanceDataClient($_GET);
+                            break;
                             default:
                                 include __DIR__."/../View/Clientes/index.php";
                                 break;
                         }
+                        break;
+                    case 'performance':
+                        switch($metodo){
+                            default:
+                                include __DIR__."/../View/Performance/index.php";
+                                break;
+                        }
+                        break;
+                    case 'evento':
+                        switch($metodo){
+                            case 'pesquisa_evento':
+                                echo $this->controllerEventoSpivi->getEvents();
+                                break;
+                        }
+                        break;
                 }
             default:
                 if(empty($classe)){

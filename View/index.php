@@ -19,6 +19,11 @@
                 <h5 class="text-center" style="color:black">Clientes</h5>
             </a>
         </div>
+        <div class="container" style="width:20%;display:flex;justify-content:space-around;margin-top:1%;text-align:center">
+            <a href="index/performance" style=" text-decoration: none;"><img src="View/images/peso.png" alt="performanceSpivi" width="90" height="90"/>
+                <h5 class="text-center" style="color:black">Performance</h5>
+            </a>
+        </div>
         <div class="container" style="width:20%;display:flex;justify-content:space-around;margin-top:1%" >
             <a href="index.php?tipo=times" style=" text-decoration: none;"><img src="View/images/teams.png" alt="clubesSpivi" width="90" height="90"/>
                 <h5 class="text-center" style="color:black">Clubes</h5>
