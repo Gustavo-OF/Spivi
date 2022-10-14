@@ -84,8 +84,7 @@ class ControllerClienteSpivi{
         } 
     }
 
-    public function deleteClient(array $params)
-    {
+    public function deleteClient(array $params){
         $email = $params['email'];
 
         $deletaCliente = $this->servicesClienteSpivi->deleteClient($email);
@@ -102,5 +101,10 @@ class ControllerClienteSpivi{
         $performanceData = $this->servicesClienteSpivi->getPerformanceDataClient($username, $dataInicio, $dataFim, $idEvento);
 
         return json_encode($performanceData);
+    }
+
+    public function getInstructors(){
+        $professores = $this->servicesClienteSpivi->getInstructors();
+        return json_encode($professores);
     }
 }

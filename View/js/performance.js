@@ -25,17 +25,27 @@ $(document).ready(function () {
     })
 
 
-    // testar  quando a parte de evento estiver pronta
-    // $.ajax({
-    //     url: 'evento/pesquisa_evento',
-    //     type: 'GET',
-    //     success: function(data){
-    //         console.log(data);
-    //     },
-    //     error: function(xhr,status,error){
-    //         console.log(xhr.responseText);
-    //     }
-    // })
+    //testar  quando a parte de evento estiver pronta
+    $.ajax({
+        url: 'eventos/pesquisa_evento',
+        type: 'GET',
+        data: {
+            data_ini: "",
+            data_fim: "",
+        },
+        success: function(data){
+            data = JSON.parse(data);
+            for (let i = 0; i < data.Event.length; i++) {
+                $('#selectEvento').append($('<option>', {
+                    value: data.Event[i].EventID,
+                    text: data.Event[i].Description
+                }));
+            }
+        },
+        error: function(xhr,status,error){
+            console.log(xhr.responseText);
+        }
+    })
 
     $("#selectEvento").change(function(){
         if($(this).val() != 0){
@@ -74,7 +84,7 @@ $(document).ready(function () {
     });
 
     $("#botaoPesquisaUsuario").click(function () {
-        if ($("#pesquisaDataInicio").val().length <= 0) {
+        if (($("#pesquisaDataInicio").val().length <= 0 || $("#pesquisaDataFim").val().length <= 0) && $("#selectEvento :selected").val() == 0) {
             $("#pesquisaDataInicio").addClass("is-invalid");
             $("#pesquisaDataFim").addClass("is-invalid");
         } else {

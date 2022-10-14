@@ -160,5 +160,20 @@ class ServicesClienteSpivi extends Spivi{
 
         return $performanceData;
     }
+
+    public function getInstructors()
+    {
+        $this->authSpivi();
+
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()));
+        
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/GetInstructors',$request));
+        
+        $instructors = $results->Clients;
+
+        $this->unsetSpivi();
+
+        return $instructors;
+    }
 }
 ?>

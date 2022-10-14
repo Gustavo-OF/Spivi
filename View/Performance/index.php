@@ -48,29 +48,28 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="form-floating col-md-6 mb-2">
-					<select class="form-select w-75" id="selectAluno">
+					<select class="form-select w-100" id="selectAluno">
 						<option selected value="0">Selecione um aluno...</option>
 					</select>
 					<label for="selectAluno">&nbsp;Aluno:</label>
 				</div>
 				<div class="form-floating col-md-6 mb-2">
-					<select class="form-select w-75" id="selectEvento">
+					<select class="form-select w-100" id="selectEvento">
 						<option selected value="0">Nenhum em específico</option>
-						<option value="1">Teste</option>
 					</select>
 					<label for="selectEvento">&nbsp;Evento:</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-floating col-md-6">
-					<input class="form-control w-75" type="date" id="pesquisaDataInicio" value="" />
+					<input class="form-control w-100" type="date" id="pesquisaDataInicio" value="" />
 					<label for="pesquisaDataInicio">&nbsp;Data inicio do evento:</label>
 					<div id="pesquisaDataInicioFeedback" class="invalid-feedback">
         				Selecione uma data válida.
       				</div>
 				</div>
 				<div class="form-floating col-md-6">
-					<input class="form-control w-75" type="date" id="pesquisaDataFim" value="" />
+					<input class="form-control w-100" type="date" id="pesquisaDataFim" value="" />
 					<label for="pesquisaDataFim">&nbsp;Data fim do evento:</label>
 					<div id="pesquisaDataFimFeedback" class="invalid-feedback">
         				Selecione uma data válida.

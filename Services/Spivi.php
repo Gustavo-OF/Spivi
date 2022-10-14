@@ -60,7 +60,9 @@ class Spivi{
                 $this->credenciais[0]['COD_UNIDADE'],
                 $this->credenciais[0]['SOURCE_NAME'],
                 $this->credenciais[0]['PASSWORD'],
-                $this->credenciais[0]['SITE_ID']
+                $this->credenciais[0]['SITE_ID'],
+                $this->credenciais[0]['BOX_ID_CYCLING'],
+                $this->credenciais[0]['BOX_ID_GROUP_X']
             );
     
             $this->sourceCredentials = array(
@@ -70,6 +72,11 @@ class Spivi{
             );
             $this->database->disconnect();
         }
+    }
+
+    protected function getAuthSpivi()
+    {
+        return $this->authSpivi;
     }
 
     protected function unsetSpivi(){

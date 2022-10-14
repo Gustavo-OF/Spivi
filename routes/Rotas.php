@@ -80,6 +80,9 @@ class Rotas
                             case 'pesquisa_performance':
                                 echo $this->controllerClienteSpivi->getPerformanceDataClient($_GET);
                             break;
+                            case 'pesquisa_professor':
+                                echo $this->controllerClienteSpivi->getInstructors();
+                            break;
                             default:
                                 include __DIR__."/../View/Clientes/index.php";
                                 break;
@@ -92,13 +95,20 @@ class Rotas
                                 break;
                         }
                         break;
-                    case 'evento':
+                    case 'eventos':
                         switch($metodo){
                             case 'pesquisa_evento':
-                                echo $this->controllerEventoSpivi->getEvents();
+                                echo $this->controllerEventoSpivi->getEvents($_GET);
+                            break;
+                            case 'insere_evento':
+                                echo $this->controllerEventoSpivi->addEvent($_POST);
+                            break;
+                            default:
+                                include __DIR__."/../View/Eventos/index.php";
                                 break;
+
                         }
-                        break;
+                    break;
                 }
             default:
                 if(empty($classe)){

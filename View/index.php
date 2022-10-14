@@ -25,15 +25,15 @@
             </a>
         </div>
         <div class="container" style="width:20%;display:flex;justify-content:space-around;margin-top:1%" >
-            <a href="index.php?tipo=times" style=" text-decoration: none;"><img src="View/images/teams.png" alt="clubesSpivi" width="90" height="90"/>
-                <h5 class="text-center" style="color:black">Clubes</h5>
-            </a>
-        </div>
-        <div class="container" style="width:20%;display:flex;justify-content:space-around;margin-top:1%" >
-            <a href="index.php?tipo=sensores" style=" text-decoration: none;"><img src="View/images/sensor.png" alt="sensorSpivi" width="90" height="90"/>
+            <a href="index/eventos" style=" text-decoration: none;"><img src="View/images/sensor.png" alt="sensorSpivi" width="90" height="90"/>
                 <h5 class="text-center" style="color:black">Eventos</h5>
             </a>
         </div>
+        <!-- <div class="container" style="width:20%;display:flex;justify-content:space-around;margin-top:1%" >
+            <a href="index.php?tipo=times" style=" text-decoration: none;"><img src="View/images/teams.png" alt="clubesSpivi" width="90" height="90"/>
+                <h5 class="text-center" style="color:black">Clubes</h5>
+            </a>
+        </div> -->
         <!-- <p> Clique <a href="index.php?tipo=sair">aqui</a> para sair</p> -->
     </div>
     </span>
