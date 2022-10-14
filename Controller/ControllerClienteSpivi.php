@@ -37,12 +37,15 @@ class ControllerClienteSpivi{
         $country = "BRA";
         $data_nascimento = $params['data_nasc'];
         $celular = $params['celular'];
+        $deviceId = $params['device_id'];
+        $cpf = $params['cpf'];
         if(substr($celular,0,1) == 0){
             $celular = substr($celular,1);
         }
         $insereNovoCliente = $this->servicesClienteSpivi->insertNewClient(
             $username, $password, $gender, $firstname, $lastname,
-            $endereco, $cidade, $country,$data_nascimento,$celular
+            $endereco, $cidade, $country,$data_nascimento,$celular,
+            $deviceId,$cpf
         );
 
         if($insereNovoCliente->ErrorCode != 200){
@@ -56,7 +59,7 @@ class ControllerClienteSpivi{
         $nomeSeparado = explode(" ",$params['nome']);
         $username = $params['email'];
         $firstname = $nomeSeparado[0];
-        $lastname = $nomeSeparado[1];
+        $lastname = isset($nomeSeparado[1]) ? $nomeSeparado[1] : "";
         $endereco = $params['endereco'];
         $cidade = $params['cidade'];
         $celular = $params['celular'];
@@ -66,11 +69,12 @@ class ControllerClienteSpivi{
         $rhr = $params['RHR'];
         $pst = $params['PST'];
         $lthr = $params['LTHR'];
+        $deviceId = $params['device_id'];
 
         $atualizaCliente = $this->servicesClienteSpivi->updateClient(
             $username,$firstname,$lastname,$endereco,$cidade,
             $celular,$peso,$altura,$ftp,$rhr,$pst,
-            $lthr
+            $lthr,$deviceId
         );
 
         if($atualizaCliente->ErrorCode != 200){

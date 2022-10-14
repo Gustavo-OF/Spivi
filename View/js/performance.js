@@ -1,25 +1,24 @@
 $(document).ready(function () {
     $.ajax({
-        url:"usuarios/pesquisa_nome",
+        url: "usuarios/pesquisa_nome",
         type: "GET",
-        data:{
+        data: {
             valor: ""
         },
         beforeSend: function () {
             document.getElementById("loading").className = "loading_v";
         },
-        success: function(data){
+        success: function (data) {
             data = JSON.parse(data);
-            for(let i = 0;i < data.Client.length;i++){
+            for (let i = 0; i < data.Client.length; i++) {
                 $('#selectAluno').append($('<option>', {
                     value: data.Client[i].Email,
                     text: data.Client[i].DisplayName
                 }));
-            } 
+            }
             document.getElementById("loading").className = "loading_b";
-            console.log(data);
         },
-        error: function(xhr,status,error){
+        error: function (xhr, status, error) {
             document.getElementById("loading").className = "loading_b";
             console.log(xhr.responseText);
         }
@@ -38,32 +37,50 @@ $(document).ready(function () {
     //     }
     // })
 
-    $("#pesquisaDataInicio").change(function(){
-        if($(this).val().length > 0){
-            $(this).removeClass("is-invalid");
-        }
-    });
-
-    $("#pesquisaDataFim").change(function(){
-        if($(this).val().length > 0){
-            $(this).removeClass("is-invalid");
-        }
-    });
-
-    $("#selectAluno").change(function(){
+    $("#selectEvento").change(function(){
         if($(this).val() != 0){
+            $("#pesquisaDataInicio").attr("disabled",true);
+            $("#pesquisaDataFim").attr("disabled",true);
+        }else{
+            $("#pesquisaDataInicio").attr("disabled",false);
+            $("#pesquisaDataFim").attr("disabled",false);
+        }
+    });
+
+    $("#pesquisaDataInicio,pesquisaDataFim").change(function(){
+        if($("#pesquisaDataInicio").val().length > 0 || $("#pesquisaDataFim").val().length > 0){
+            $("#selectEvento").attr("disabled",true)
+        }else{
+            $("#selectEvento").attr("disabled",false);
+        }
+    })
+
+    $("#pesquisaDataInicio").change(function () {
+        if ($(this).val().length > 0) {
+            $(this).removeClass("is-invalid");
+        }
+    });
+
+    $("#pesquisaDataFim").change(function () {
+        if ($(this).val().length > 0) {
+            $(this).removeClass("is-invalid");
+        }
+    });
+
+    $("#selectAluno").change(function () {
+        if ($(this).val() != 0) {
             $(this).removeClass("is-invalid");
         }
     });
 
     $("#botaoPesquisaUsuario").click(function () {
-        if($("#pesquisaDataInicio").val().length <= 0){
+        if ($("#pesquisaDataInicio").val().length <= 0) {
             $("#pesquisaDataInicio").addClass("is-invalid");
             $("#pesquisaDataFim").addClass("is-invalid");
-        }else{
-            if($("#selectAluno :selected").val() == 0){
+        } else {
+            if ($("#selectAluno :selected").val() == 0) {
                 $("#selectAluno").addClass("is-invalid");
-            }else{
+            } else {
                 $("#tabelaResultadoPesquisa tbody").html("");
                 const EMAIL = $("#selectAluno :selected").val();
                 const DATA_INICIO = $("#pesquisaDataInicio").val();
@@ -83,30 +100,21 @@ $(document).ready(function () {
                         document.getElementById("loading").className = "loading_v";
                     },
                     success: function (data) {
+                        let nomeCliente = $("#selectAluno :selected").text();
                         data = JSON.parse(data);
                         console.log(data);
-                        // let cor = "";
-                        // if (data.Client !== undefined) {
-                        //     let linha = "";
-                        //     if (data.Client.length > 1) {
-                        //         for (let i = 0; i < data.Client.length; i++) {
-                        //             cor = data.Client[i].LevelName=="Bronze" ? "#cd7f32" : data.Client[i].LevelName;
-                        //             linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + data.Client[i].DisplayName + "</td><td class='text-center'>" + data.Client[i].Email + "</td><td class='text-center' style='color:"+cor+"'>" + data.Client[i].LevelName + "</td>";
-                        //             linha = linha.concat("<td class='text-center'>" + data.Client[i].FTP + " BPM</td><td class='text-center'>" + data.Client[i].LTHR + " BPM</td><td class='text-center'>" + data.Client[i].RHR + " BPM</td>");
-                        //             linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client[i].Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
-                        //             $("#tabelaResultadoPesquisa tbody").append(linha);
-                        //         }
-                        //     } else {
-                        //         cor = data.Client.LevelName=="Bronze" ? "#cd7f32" : data.Client.LevelName;
-                        //         linha = "<tr><th scope='row' class='text-center'>1</th><td class='text-center'>" + data.Client.DisplayName + "</td><td class='text-center'>" + data.Client.Email + "</td><td class='text-center' style='color:"+cor+"'>" + data.Client.LevelName + "</td>";
-                        //         linha = linha.concat("<td class='text-center'>" + data.Client.FTP + " BPM</td><td class='text-center'>" + data.Client.LTHR + " BPM</td><td class='text-center'>" + data.Client.RHR + " BPM</td>");
-                        //         linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client.Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
-                        //         $("#tabelaResultadoPesquisa tbody").append(linha);
-                        //     }
-                        //     $("#divUsuariosDisponiveisPesquisa").show();
-                        // } else {
-                        //     console.log("Não encontrado.");
-                        // }
+                        if (data.Workout !== undefined) {
+                            let linha = "";
+                            linha = "<tr><th scope='row' class='text-center'>1</th><td class='text-center'>" + nomeCliente + "</td><td class='text-center'>" + data.Workout.WorkoutName + "</td><td class='text-center'>" + data.Workout.Calories + "</td>";
+                            linha = linha.concat("<td class='text-center'>" + data.Workout.AvgSpeed + "</td><td class='text-center'>" + data.Workout.MaxSpeed+ "</td><td class='text-center'>" + data.Workout.Distance +" "+data.Workout.DistanceUnits+"</td>");
+                            linha = linha.concat("<td class='text-center'>"+data.Workout.AvgHR+" BPM</td>")
+                            //linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='" + data.Client.Email + "' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
+                            $("#tabelaResultadoPesquisa tbody").append(linha);
+
+                            $("#divUsuariosDisponiveisPesquisa").show();
+                        } else {
+                            console.log("Não encontrado.");
+                        }
                         document.getElementById("loading").className = "loading_b";
                     },
                     error: function (xhr, status, error) {

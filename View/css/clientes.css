@@ -92,3 +92,9 @@ h5{
 .div-edita{
     column-count: 2;
 }
+
+@media (max-width: 410px) {
+    .divResultado{
+        display: grid !important;
+    }
+}

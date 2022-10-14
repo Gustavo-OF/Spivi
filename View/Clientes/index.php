@@ -47,12 +47,12 @@
 		</div>
 		<div class="card-body">
 			<div class="row">
-				<div class="form-floating col-md-6">
-					<input class="form-control w-75" type="text" id="pesquisaNomeUsuario" value="" />
+				<div class="form-floating col-md-6 mt-2">
+					<input class="form-control w-100" type="text" id="pesquisaNomeUsuario" value="" />
 					<label for="pesquisaNomeUsuario">&nbsp;Nome do aluno:</label>
 				</div>
-				<div class="form-floating col-md-6">
-					<input class="form-control w-75" type="text" id="pesquisaEmailUsuario" value="" />
+				<div class="form-floating col-md-6 mt-2">
+					<input class="form-control w-100" type="text" id="pesquisaEmailUsuario" value="" />
 					<label for="pesquisaEmailUsuario">&nbsp;Email do aluno:</label>
 				</div>
 			</div>
@@ -83,6 +83,7 @@
 						<th scope="col" class="text-center">FTP</th>
 						<th scope="col" class="text-center">LTHR</th>
 						<th scope="col" class="text-center">RHR</th>
+						<th scope="col" class="text-center" style="width:10%">ID do dispositivo</th>
 						<th scope="col" class="text-center">Editar</th>
 					</tr>
 				</thead>
@@ -211,20 +212,25 @@
 					<br />
 					<br />
 					<div class="loader" id="loading-confirma-aluno" style="margin: 0; position: center"></div>
-					<img alt="imagem-aluno" id="foto-conf" style="max-width:200px; max-height: 200px;">
-					<div class="confirma-inclusao">
+					<div class="divResultado" style="display: inline-flex;">
+						<div class="imagem" style="padding-right: 2.5rem;">
+							<img alt="imagem-aluno" id="foto-conf" style="max-width:200px; max-height: 200px;">
+						</div>
+						<div class="confirma-inclusao">
 
-						<h5 id="cod_aluno_confirma"></h5>
-						<h5 id="nome_aluno_confirma"></h5>
-						<h5 id="email_aluno_confirma" style="line-break: anywhere;"></h5>
-						<h5 id="cpf_aluno_confirma"></h5>
-						<h5 id="data_nasc_aluno_confirma"></h5>
-						<h5 id="plano_aluno_confirma"></h5>
+							<h6 id="cod_aluno_confirma"></h6>
+							<h6 id="nome_aluno_confirma"></h6>
+							<h6 id="email_aluno_confirma" style="line-break: anywhere;"></h6>
+							<h6 id="cpf_aluno_confirma"></h6>
+							<h6 id="data_nasc_aluno_confirma"></h6>
+							<h6 id="plano_aluno_confirma"></h6>
+							<h6 id="deviceID" class="d-inline-flex"><b>ID do dispositivo: </b> <input type="number" id="numberDeviceId" class="form-control w-25" style="height:76%"> </h6>
 
-						<input type="hidden" id="genero">
-						<input type="hidden" id="endereco">
-						<input type="hidden" id="cidade">
-						<input type="hidden" id="celular">
+							<input type="hidden" id="genero">
+							<input type="hidden" id="endereco">
+							<input type="hidden" id="cidade">
+							<input type="hidden" id="celular">
+						</div>
 					</div>
 				</div>
 				<div class="alert alert-warning div-retorno" role="alert">
@@ -298,7 +304,7 @@
 							<input type="text" disabled class="form-control" id="spivi-level" name="spivi-level">
 							<label for="spivi-level">Level</label>
 						</div>
-						<div class="form-floating mb-3">
+						<div class="form-floating mb-3" style="padding-bottom: 1rem;">
 							<input type="text" class="form-control" id="spivi-ftp" name="spivi-ftp">
 							<label for="spivi-ftp">FTP</label>
 						</div>
@@ -318,9 +324,13 @@
 							<input type="text" class="form-control" id="spivi-rhr" name="spivi-rhr">
 							<label for="spivi-rhr">RHR</label>
 						</div>
-						<div class="form-floating">
+						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="spivi-pst" name="spivi-pst">
 							<label for="spivi-pst">PST</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="number" class="form-control" id="spivi-device-id" name="spivi-device">
+							<label for="spivi-device-id">ID do dispositivo</label>
 						</div>
 					</div>
 					<!-- <div class="form-floating mb-3">

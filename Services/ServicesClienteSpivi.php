@@ -44,7 +44,9 @@ class ServicesClienteSpivi extends Spivi{
         $cidade, 
         $country,
         $birthdate,
-        $celular
+        $celular,
+        $deviceId,
+        $cpf
     ) : object
     {
         $this->authSpivi();
@@ -59,7 +61,9 @@ class ServicesClienteSpivi extends Spivi{
             "City" => $this->getFuncoes()->remover_Injection($cidade),
             "Country" => $country,
             "BirthDate" => $birthdate,
-            "Phone" => $celular
+            "Phone" => $celular,
+            "DeviceID" => $deviceId,
+            "Notes" => $cpf
         ];
 
         $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
@@ -83,7 +87,8 @@ class ServicesClienteSpivi extends Spivi{
        int $ftp,
        int $rhr,
        int $pst,
-       int $lthr
+       int $lthr,
+       int $device_id
     ) : object{
         $this->authSpivi();
 
@@ -99,7 +104,8 @@ class ServicesClienteSpivi extends Spivi{
             "FTP" => $ftp,
             "RHR" => $rhr,
             "PST" => $pst,
-            "LTHR" => $lthr
+            "LTHR" => $lthr,
+            "DeviceID" => $device_id
         ];
 
         $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);

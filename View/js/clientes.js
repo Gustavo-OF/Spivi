@@ -36,16 +36,22 @@ $(document).ready(function () {
                     let linha = "";
                     if (data.Client.length > 1) {
                         for (let i = 0; i < data.Client.length; i++) {
+                            if(jQuery.isEmptyObject(data.Client[i].DeviceID)){
+                                data.Client[i].DeviceID = "";
+                            } 
                             cor = data.Client[i].LevelName=="Bronze" ? "#cd7f32" : data.Client[i].LevelName;
                             linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + data.Client[i].DisplayName + "</td><td class='text-center'>" + data.Client[i].Email + "</td><td class='text-center' style='color:"+cor+"'>" + data.Client[i].LevelName + "</td>";
-                            linha = linha.concat("<td class='text-center'>" + data.Client[i].FTP + " BPM</td><td class='text-center'>" + data.Client[i].LTHR + " BPM</td><td class='text-center'>" + data.Client[i].RHR + " BPM</td>");
+                            linha = linha.concat("<td class='text-center'>" + data.Client[i].FTP + " BPM</td><td class='text-center'>" + data.Client[i].LTHR + " BPM</td><td class='text-center'>" + data.Client[i].RHR + " BPM</td><td class='text-center'>"+data.Client[i].DeviceID+"</td>");
                             linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client[i].Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                             $("#tabelaResultadoPesquisa tbody").append(linha);
                         }
                     } else {
+                        if(jQuery.isEmptyObject(data.Client[i].DeviceID)){
+                            data.Client[i].DeviceID = "";
+                        } 
                         cor = data.Client.LevelName=="Bronze" ? "#cd7f32" : data.Client.LevelName;
                         linha = "<tr><th scope='row' class='text-center'>1</th><td class='text-center'>" + data.Client.DisplayName + "</td><td class='text-center'>" + data.Client.Email + "</td><td class='text-center' style='color:"+cor+"'>" + data.Client.LevelName + "</td>";
-                        linha = linha.concat("<td class='text-center'>" + data.Client.FTP + " BPM</td><td class='text-center'>" + data.Client.LTHR + " BPM</td><td class='text-center'>" + data.Client.RHR + " BPM</td>");
+                        linha = linha.concat("<td class='text-center'>" + data.Client.FTP + " BPM</td><td class='text-center'>" + data.Client.LTHR + " BPM</td><td class='text-center'>" + data.Client.RHR + " BPM</td><td class='text-center'>"+data.Client.DeviceID+"</td>");
                         linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client.Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                         $("#tabelaResultadoPesquisa tbody").append(linha);
                     }
@@ -179,7 +185,8 @@ $(document).ready(function () {
                 genero: $("#genero").val(),
                 endereco: $("#endereco").val(),
                 cidade: $("#cidade").val(),
-                celular: $("#celular").val()
+                celular: $("#celular").val(),
+                device_id: $("#numberDeviceId").val()
             },
             beforeSend: function () {
                 document.getElementById("loadingModel1").className = "loading_v";
@@ -228,6 +235,9 @@ $(document).ready(function () {
                 if(jQuery.isEmptyObject(data.Client.City)){
                     data.Client.City = "";
                 }
+                if(jQuery.isEmptyObject(data.Client.DeviceID)){
+                    data.Client.DeviceID = "";
+                }
                 $("#spivi-nome").val(data.Client.DisplayName);
                 $("#spivi-endereco").val(data.Client.Address ? data.Client.Address : "");
                 $("#spivi-email").val(data.Client.Email);
@@ -242,6 +252,7 @@ $(document).ready(function () {
                 $("#spivi-pst").val(data.Client.PST);
                 $("#spivi-cidade").val(data.Client.City);
                 $("#spivi-cel").val(data.Client.Phone);
+                $("#spivi-device-id").val(data.Client.DeviceID);
                 document.getElementById("loadingModel2").className = "loading_b";
             },
             error: function (xhr, status, error) {
@@ -274,6 +285,7 @@ $(document).ready(function () {
        const PST = $("#spivi-pst").val();
        const CIDADE = $("#spivi-cidade").val();
        const CEL = $("#spivi-cel").val();
+       const DEVICE_ID = $("#spivi-device-id").val();
        $.ajax({
             url: "usuarios/atualiza_aluno",
             type: "POST",
@@ -289,6 +301,7 @@ $(document).ready(function () {
                 PST: PST,
                 cidade: CIDADE,
                 celular: CEL,
+                device_id: DEVICE_ID
             },
             beforeSend: function () {
                 document.getElementById("loadingModel2").className = "loading_v";

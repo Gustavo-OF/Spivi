@@ -56,6 +56,7 @@
 				<div class="form-floating col-md-6 mb-2">
 					<select class="form-select w-75" id="selectEvento">
 						<option selected value="0">Nenhum em específico</option>
+						<option value="1">Teste</option>
 					</select>
 					<label for="selectEvento">&nbsp;Evento:</label>
 				</div>
@@ -89,20 +90,20 @@
 
 	<div class="card table-responsive">
 		<div class="card-header headerResponsive">
-			<h6 class="panel-title txt-dark">Informações do treino</h6>
+			<h6 class="panel-title txt-dark">Informações do pós-treino</h6>
 		</div>
 		<div class="card-body">
 			<table class="table table-hover" id="tabelaResultadoPesquisa">
 				<thead>
 					<tr>
 						<th scope="col" class="text-center">#</th>
-						<th scope="col" class="text-center">Nome</th>
-						<th scope="col" class="text-center">Email</th>
-						<th scope="col" class="text-center">Level</th>
-						<th scope="col" class="text-center">FTP</th>
-						<th scope="col" class="text-center">LTHR</th>
-						<th scope="col" class="text-center">RHR</th>
-						<th scope="col" class="text-center">Editar</th>
+						<th scope="col" class="text-center">Aluno</th>
+						<th scope="col" class="text-center">Treino</th>
+						<th scope="col" class="text-center">Calorias gastas</th>
+						<th scope="col" class="text-center">Velocidade média</th>
+						<th scope="col" class="text-center">Velocidade máxima</th>
+						<th scope="col" class="text-center">Distancia percorrida</th>
+						<th scope="col" class="text-center">Média de batimentos</th>
 					</tr>
 				</thead>
 				<tbody id="resultadoPesquisaCliente">
