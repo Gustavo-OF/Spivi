@@ -165,7 +165,11 @@ class ServicesClienteSpivi extends Spivi{
     {
         $this->authSpivi();
 
-        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()));
+        $params = [
+            "SiteID" => $this->getAuthSpivi()->getSiteId()
+        ];
+
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
         
         $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('ClientService/GetInstructors',$request));
         

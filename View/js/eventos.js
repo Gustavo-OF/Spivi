@@ -1,4 +1,57 @@
 
+function formataData(data){
+    let dataA = data.split("-");
+    let horaA = dataA[2].split("T");
+    let horaF = "";
+    if(parseInt(horaA[1]) <= 9){
+        horaF= "0"+horaA[1];
+    }else{
+        horaF = horaA[1];
+    }
+    let dataFormatada = ""+horaA[0]+"-"+dataA[1]+"-"+dataA[0]+"T"+horaF;
+    return dataFormatada;
+}
+
+function atualizaTabela(data,idEvent){
+    let dataIni = formataData(data.Event.StartDateTime);
+    let dataFim = formataData(data.Event.EndDateTime);
+    let nomeEvento = "";
+    if(jQuery.isEmptyObject(data.Event.Title)){
+        data.Event.Title = "";
+        nomeEvento = data.Event.Description
+    }
+    if(jQuery.isEmptyObject(data.Event.InstructorName)){
+        data.Event.InstructorName = "";
+    }
+    if(jQuery.isEmptyObject(data.Event.Description)){
+        data.Event.Description = "";
+        nomeEvento = data.Event.Title
+    }
+    let linha = "";
+    if(!jQuery.isEmptyObject(data.Event.BookedClients.BookedClient)){
+        if(data.Event.BookedClients.BookedClient.length > 1){
+            for(let c = 0; c < data.Event.BookedClients.BookedClient.length; c++){
+                linha = "<tr><th scope='row' class='text-center'>" + c + "</th><td class='text-center'>" + data.Event.BookedClients.BookedClient[c].ClientName + "</td><td class='text-center'>" + data.Event.BookedClients.BookedClient[c].UserName + "</td>";
+                linha = linha.concat("<td class='text-center'>" + data.Event.BookedClients.BookedClient[c].SeatID + "</td>");
+                linha = linha.concat("<td class=text-center><button type='button' data-value='"+data.Event.BookedClients.BookedClient[c].ClientID+"' class='btn-sm btn btn-outline-danger btnRemoverAlunoEvento'>Remover</button></td></tr>");
+                $("#tabelaVagas tbody").append(linha);
+
+            }
+        }else{
+            linha = "<tr><th scope='row' class='text-center'> 1 </th><td class='text-center'>" + data.Event.BookedClients.BookedClient.ClientName + "</td><td class='text-center'>" + data.Event.BookedClients.BookedClient.UserName + "</td>";
+                linha = linha.concat("<td class='text-center'>" + data.Event.BookedClients.BookedClient.SeatID + "</td>");
+                linha = linha.concat("<td class=text-center><button type='button' data-value='"+data.Event.BookedClients.BookedClient.ClientID+"' class='btn-sm btn btn-outline-danger btnRemoverAlunoEvento'>Remover</button></td></tr>");
+                $("#tabelaVagas tbody").append(linha);
+        }
+    }
+    $("#eventoID").val(idEvent);
+    $("#spivi-evento-edita-nome").val(nomeEvento);
+    $("#spivi-evento-edita-data-inicio").val(dataIni);
+    $("#spivi-evento-edita-data-fim").val(dataFim);
+    $("#spivi-evento-edita-professor").val(data.Event.InstructorName);
+    $("#labelVagas").html("Vagas disponíveis: "+data.Event.AvailableSeats.AvailableSeat.length);
+}
+
 $(document).ready(function () {
 
     $("#spivi-evento-data-inicial").change(function () {
@@ -68,23 +121,61 @@ $(document).ready(function () {
             },
             success: function (data) {
                 data = JSON.parse(data);
-                let linha = ""
-                if(data.Event.length > 1){
-                    for(let i = 0; i < data.Event.length; i++){
-                        linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + data.Event[i].Description + "</td><td class='text-center'>" + data.Event[i].InstructorName + "</td><td class='text-center'>" + data.Event[i].Description + "</td>";
-                        linha = linha.concat("<td class='text-center'>" + data.Event[i].StartDateTime + "</td><td class='text-center'>" + data.Event[i].EndDateTime + "</td>");
-                        //linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Event[i].EventID+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
-                        $("#tabelaResultadoPesquisa tbody").append(linha);
-                    }
-                }else{
-                    linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + data.Event.Description + "</td><td class='text-center'>" + data.Event.InstructorName + "</td><td class='text-center'>" + data.Event.Description + "</td>";
-                    linha = linha.concat("<td class='text-center'>" + data.Event.StartDateTime + "</td><td class='text-center'>" + data.Event.EndDateTime + "</td>");
-                    //linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Event.EventID+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
-                    $("#tabelaResultadoPesquisa tbody").append(linha);
-                }
-
                 console.log(data);
-                document.getElementById("loading").className = "loading_b";
+                let linha = ""
+                if(!jQuery.isEmptyObject(data.Event)){
+                    if(data.Event.length > 1){
+                        for(let i = 0; i < data.Event.length; i++){
+                            let nomeEvento = "";
+                            if(jQuery.isEmptyObject(data.Event[i].Title)){
+                                data.Event[i].Title = "";
+                                nomeEvento = data.Event[i].Description; 
+                            }
+                            if(jQuery.isEmptyObject(data.Event[i].InstructorName)){
+                                data.Event[i].InstructorName = "";
+                            }
+                            if(jQuery.isEmptyObject(data.Event[i].Description)){
+                                data.Event[i].Description = "";
+                                nomeEvento = data.Event[i].Title; 
+                            }
+
+                            let dataIni = new Date(formataData(data.Event[i].StartDateTime));
+                            let dataFim = new Date(formataData(data.Event[i].EndDateTime));
+
+                            if(data.Event[i].IsCancelled == 0){
+                                linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + nomeEvento + "</td><td class='text-center'>" + data.Event[i].InstructorName + "</td>";
+                                linha = linha.concat("<td class='text-center'>" + dataIni.toLocaleDateString("pt-BR")+" "+dataIni.toLocaleTimeString("pt-BR",{hour: '2-digit', minute:'2-digit'}) + "</td><td class='text-center'>" + dataFim.toLocaleDateString("pt-BR")+" "+dataFim.toLocaleTimeString("pt-BR",{hour: '2-digit', minute:'2-digit'}) + "</td>");
+                                linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Event[i].EventID+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
+                                $("#tabelaResultadoPesquisa tbody").append(linha);
+                            }                           
+                        }
+                    }else{
+                        let nomeEvento = "";
+                        if(jQuery.isEmptyObject(data.Event.Title)){
+                            data.Event.Title = "";
+                            nomeEvento = data.Event.Description; 
+                        }
+                        if(jQuery.isEmptyObject(data.Event.InstructorName)){
+                            data.Event.InstructorName = "";
+                        }
+                        if(jQuery.isEmptyObject(data.Event.Description)){
+                            data.Event.Description = "";
+                            nomeEvento = data.Event.Title; 
+                        }
+
+                        let dataIni = new Date(formataData(data.Event.StartDateTime));
+                        let dataFim = new Date(formataData(data.Event.EndDateTime));
+
+                        if(data.Event.IsCancelled == 0){
+                            linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + nomeEvento + "</td><td class='text-center'>" + data.Event.InstructorName + "</td>";
+                            linha = linha.concat("<td class='text-center'>" + dataIni.toLocaleDateString("pt-BR")+" "+dataIni.toLocaleTimeString("pt-BR",{hour: '2-digit', minute:'2-digit'}) + "</td><td class='text-center'>" + dataFim.toLocaleDateString("pt-BR")+" "+dataFim.toLocaleTimeString("pt-BR",{hour: '2-digit', minute:'2-digit'}) + "</td>");
+                            linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Event.EventID+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
+                            $("#tabelaResultadoPesquisa tbody").append(linha);
+                        }
+                    }
+            }
+
+                    document.getElementById("loading").className = "loading_b";
             },
             error: function (xhr, status, error) {
                 document.getElementById("loading").className = "loading_b";
@@ -123,7 +214,7 @@ $(document).ready(function () {
                         data = JSON.parse(data);
                         $(".div-retorno").show(function () {
                             if (data.ErrorCode) {
-                                $(".mensagem-retorno").text(data.Message);
+                                $(".mensagem-retorno").text(data.message);
                             }else{
                                 $(".mensagem-retorno").text("Evento criado com sucesso.");
 
@@ -142,174 +233,68 @@ $(document).ready(function () {
             }
         }
     });
-    $("#modal-confirma-inclusao").on("shown.bs.modal", function (e) {
-        let value = $(e.relatedTarget).data('value');
-        $.ajax({
-            type: "GET",
-            url: "usuarios/pesquisa_aluno_ux",
-            data: {
-                valor: value,
-                cod_unidade: $("#codUnidade").val()
-            },
-            beforeSend: function () {
-                document.getElementById("loadingModel1").className = "loading_v";
-            },
-            success: function (data) {
-                data = JSON.parse(data);
-                //user001
-                if ($("#codUnidade").val() == "00") {
-                    $("#foto-conf").attr("src", "https://ux.ultrafit.com.br/ControlGym/View/fotos/user001.png")
-                } else {
-                    $("#foto-conf").attr("src", "https://ux.ultrafit.com.br/ControlGym/View/fotos/" + data[0].COD_ALUNO + ".png")
-                }
-                $("#cod_aluno_confirma").html("<b>Cód. Aluno:</b>" + data[0].COD_ALUNO);
-                $("#nome_aluno_confirma").html("<b>Nome:</b>" + data[0].NOME_INICIAL + " " + data[0].NOME_FINAL);
-                $("#email_aluno_confirma").html("<b>Email:</b>" + data[0].EMAIL);
-                $("#cpf_aluno_confirma").html("<b>CPF:</b>" + data[0].CPF);
-                let data_nasc = new Date(data[0].DATA_NASC);
-                $("#data_nasc_aluno_confirma").html("<b>Data de nascimento:</b>" + data_nasc.toLocaleDateString("pt-BR"));
-                $("#plano_aluno_confirma").html("<b>Plano:</b>" + data[0].PLVIG);
-                $("#genero").val(data[0].SEXO);
-                $("#endereco").val(data[0].ENDERECO);
-                $("#cidade").val(data[0].CIDADE);
-                $("#celular").val(data[0].CEL);
-                document.getElementById("loadingModel1").className = "loading_b";
-            },
-            error: function (xhr, status, error) {
-                document.getElementById("loadingModel1").className = "loading_b";
-                console.log(xhr.responseText);
-            }
-        });
-    });
-
-    $("#btn-aplica-insercao").click(function () {
-        let htmlCodAluno = $("#cod_aluno_confirma").html();
-        htmlCodAluno = htmlCodAluno.split("</b>");
-        let htmlNome = $("#nome_aluno_confirma").html();
-        htmlNome = htmlNome.split("</b>");
-        let htmlEmail = $("#email_aluno_confirma").html();
-        htmlEmail = htmlEmail.split("</b>");
-        let htmlCpf = $("#cpf_aluno_confirma").html();
-        htmlCpf = htmlCpf.split("</b>");
-        let htmlDataNasc = $("#data_nasc_aluno_confirma").html();
-        htmlDataNasc = htmlDataNasc.split("</b>");
-        let htmlPlano = $("#plano_aluno_confirma").html();
-        htmlPlano = htmlPlano.split("</b>");
-
-        const COD_ALUNO = htmlCodAluno[1];
-        const NOME = htmlNome[1];
-        const CPF = htmlCpf[1];
-        const DATA_NASC = htmlDataNasc[1];
-        const PLANO = htmlPlano[1];
-        const EMAIL = htmlEmail[1];
-
-        $.ajax({
-            type: "POST",
-            url: "usuarios/insere_usuario_spivi",
-            data: {
-                cod_aluno: COD_ALUNO,
-                nome: NOME,
-                cpf: CPF,
-                data_nasc: DATA_NASC,
-                plano: PLANO,
-                email: EMAIL,
-                genero: $("#genero").val(),
-                endereco: $("#endereco").val(),
-                cidade: $("#cidade").val(),
-                celular: $("#celular").val(),
-                device_id: $("#numberDeviceId").val()
-            },
-            beforeSend: function () {
-                document.getElementById("loadingModel1").className = "loading_v";
-            },
-            success: function (data) {
-                data = JSON.parse(data);
-                document.getElementById("loadingModel1").className = "loading_b";
-                $(".div-retorno").show(function () {
-                    if (data.Code[0]) {
-                        $(".mensagem-retorno").text(data.Message[0]);
-                    } else {
-                        $(".mensagem-retorno").text(data.Message);
-                    }
-                    $(".div-retorno").fadeIn("slow", function () {
-                        $(".div-retorno").delay(4000).fadeOut('slow');
-                    });
-                });
-            },
-            error: function (xhr, status, error) {
-                document.getElementById("loadingModel1").className = "loading_b";
-                console.log(xhr.responseText);
-            }
-        })
-    });
 
     $("#modal-edita-aluno").on("show.bs.modal", function (e) {
-        let email = $(e.relatedTarget).data('value');
+        let idEvent = $(e.relatedTarget).data('value');
+        console.log(idEvent);
         $.ajax({
-            url: 'usuarios/pesquisa_email',
+            url: 'eventos/pesquisa_evento_id',
             type: 'GET',
-            data: {
-                valor: email
+            data:{
+                valor: idEvent
             },
             beforeSend: function () {
                 document.getElementById("loadingModel2").className = "loading_v";
             },
-            success: function (data) {
+            success: function(data){
                 data = JSON.parse(data);
-                let cor = data.Client.LevelName == "Bronze" ? "#cd7f32" : data.Client.LevelName;
-                if (jQuery.isEmptyObject(data.Client.Address)) {
-                    data.Client.Address = "";
-                }
-                if (jQuery.isEmptyObject(data.Client.Phone)) {
-                    data.Client.Phone = "";
-                }
-                if (jQuery.isEmptyObject(data.Client.City)) {
-                    data.Client.City = "";
-                }
-                if (jQuery.isEmptyObject(data.Client.DeviceID)) {
-                    data.Client.DeviceID = "";
-                }
-                $("#spivi-nome").val(data.Client.DisplayName);
-                $("#spivi-endereco").val(data.Client.Address ? data.Client.Address : "");
-                $("#spivi-email").val(data.Client.Email);
-                $("#spivi-level").val(data.Client.LevelName);
-                $("#spivi-level").css("background-color", cor)
-                $("#spivi-level").css("border-color", cor)
-                $("#spivi-ftp").val(data.Client.FTP);
-                $("#spivi-lthr").val(data.Client.LTHR);
-                $("#spivi-peso").val(data.Client.Weight);
-                $("#spivi-altura").val(data.Client.Height);
-                $("#spivi-rhr").val(data.Client.RHR);
-                $("#spivi-pst").val(data.Client.PST);
-                $("#spivi-cidade").val(data.Client.City);
-                $("#spivi-cel").val(data.Client.Phone);
-                $("#spivi-device-id").val(data.Client.DeviceID);
+                $("#tabelaVagas tbody").html("");
+                console.log(data);
+                atualizaTabela(data,idEvent);
                 document.getElementById("loadingModel2").className = "loading_b";
             },
             error: function (xhr, status, error) {
                 document.getElementById("loadingModel2").className = "loading_b";
                 console.log(xhr.responseText);
+            },complete: function(){
+                $(".btnRemoverAlunoEvento").click(function(){
+                    let idCliente = $(this).data("value");
+                    $.ajax({
+                        url: 'eventos/remove_usuario_evento',
+                        type: 'POST',
+                        data:{
+                            idCliente: idCliente,
+                            idEvento: idEvent
+                        },
+                        success: function(data){
+                            console.log(data);
+                        },
+                        error: function(xhr,status,error){
+                            console.log(xhr.responseText);
+                        }
+                    })
+                });
             }
         })
     });
 
-    $("input[name^='spivi'], select[name^='spivi']").change(function () {
-        if(
-            $("#spivi-evento-nome").val().length > 0 && 
-            $("#spivi-evento-data-inicial").val().length > 0 &&
-            $("#spivi-evento-data-final").val().length > 0 &&
-            $("#spivi-evento-professor :selected").val() != 0
-        ){
-            $("#btn-adiciona-evento").attr("disabled", false);
-        }
-    });
-    $("#campoPesquisaAluno").keyup(function () {
-        if ($("#campoPesquisaAluno").val().length > 0) {
-            $("#btnPesquisaAluno").attr("disabled", false);
-        } else {
-            $("#btnPesquisaAluno").attr("disabled", true);
-        }
-    });
+    // $("input[name^='spivi'], select[name^='spivi']").change(function () {
+    //     if(
+    //         $("#spivi-evento-nome").val().length > 0 && 
+    //         $("#spivi-evento-data-inicial").val().length > 0 &&
+    //         $("#spivi-evento-data-final").val().length > 0 &&
+    //         $("#spivi-evento-professor :selected").val() != 0
+    //     ){
+    //         $("#btn-adiciona-evento").attr("disabled", false);
+    //     }
+    // });
+    // $("#campoPesquisaAluno").keyup(function () {
+    //     if ($("#campoPesquisaAluno").val().length > 0) {
+    //         $("#btnPesquisaAluno").attr("disabled", false);
+    //     } else {
+    //         $("#btnPesquisaAluno").attr("disabled", true);
+    //     }
+    // });
 
     $("#btn-aplica-atualizacao").click(function () {
         const NOME = $("#spivi-nome").val();
@@ -364,13 +349,13 @@ $(document).ready(function () {
             }
         });
     });
-    $("#deleta-cliente").click(function () {
-        const EMAIL = $("#spivi-email").val();
+    $("#deleta-evento").click(function () {
+        const idEvento = $("#eventoID").val();
         $.ajax({
-            url: "usuarios/deleta_aluno",
+            url: "eventos/deleta_evento",
             type: "POST",
             data: {
-                email: EMAIL
+                idEvento: idEvento
             },
             beforeSend: function () {
                 document.getElementById("loadingModel2").className = "loading_v";
@@ -384,8 +369,9 @@ $(document).ready(function () {
                         $(".mensagem-retorno").text(data.Message);
                     }
                     $(".div-retorno").fadeIn("slow", function () {
-                        $(".div-retorno").delay(3000).fadeOut('slow');
-                        location.reload();
+                        $(".div-retorno").delay(3000).fadeOut('slow',function(){
+                            location.reload();
+                        });
                     });
                 });
                 document.getElementById("loadingModel2").className = "loading_b";

@@ -13,7 +13,7 @@
 </head>
 
 <body style="margin:1rem">
-	<input type="hidden" id="codUnidade" value=<?php echo isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "00"; ?>>
+	<input type="hidden" id="codUnidade" value=<?php echo isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "01"; ?>>
 	<div id="loading" name="loading" class="loading_b">
 		<div class="loader-wrapper">
 			<div class="loaderA">

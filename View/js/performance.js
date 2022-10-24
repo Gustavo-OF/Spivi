@@ -25,7 +25,6 @@ $(document).ready(function () {
     })
 
 
-    //testar  quando a parte de evento estiver pronta
     $.ajax({
         url: 'eventos/pesquisa_evento',
         type: 'GET',
@@ -35,12 +34,25 @@ $(document).ready(function () {
         },
         success: function(data){
             data = JSON.parse(data);
-            for (let i = 0; i < data.Event.length; i++) {
-                $('#selectEvento').append($('<option>', {
-                    value: data.Event[i].EventID,
-                    text: data.Event[i].Description
-                }));
+            console.log(data);
+            if(data.Event !== undefined){
+                if(data.Event.length > 1){
+                    for (let i = 0; i < data.Event.length; i++) {
+                        if(!jQuery.isEmptyObject(data.Event[i].Title)){
+                            $('#selectEvento').append($('<option>', {
+                                value: data.Event[i].EventID,
+                                text: data.Event[i].Title+" - "+data.Event[i].StartDateTime+" - "+data.Event[i].EndDateTime
+                            }));
+                        }
+                    }
+                }else{
+                    $('#selectEvento').append($('<option>', {
+                        value: data.Event.EventID,
+                        text: data.Event.Description
+                    }));
+                }
             }
+
         },
         error: function(xhr,status,error){
             console.log(xhr.responseText);

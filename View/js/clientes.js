@@ -46,8 +46,8 @@ $(document).ready(function () {
                             $("#tabelaResultadoPesquisa tbody").append(linha);
                         }
                     } else {
-                        if(jQuery.isEmptyObject(data.Client[i].DeviceID)){
-                            data.Client[i].DeviceID = "";
+                        if(jQuery.isEmptyObject(data.Client.DeviceID)){
+                            data.Client.DeviceID = "";
                         } 
                         cor = data.Client.LevelName=="Bronze" ? "#cd7f32" : data.Client.LevelName;
                         linha = "<tr><th scope='row' class='text-center'>1</th><td class='text-center'>" + data.Client.DisplayName + "</td><td class='text-center'>" + data.Client.Email + "</td><td class='text-center' style='color:"+cor+"'>" + data.Client.LevelName + "</td>";
@@ -129,7 +129,7 @@ $(document).ready(function () {
                 if($("#codUnidade").val() == "00"){
                     $("#foto-conf").attr("src","https://ux.ultrafit.com.br/ControlGym/View/fotos/user001.png")
                 }else{
-                    $("#foto-conf").attr("src","https://ux.ultrafit.com.br/ControlGym/View/fotos/"+data[0].COD_ALUNO+".png")
+                    $("#foto-conf").attr("src","https://ux.ultrafit.com.br/ControlGym/View/fotos/"+data[0].COD_ALUNO+".jpg")
                 }
                 $("#cod_aluno_confirma").html("<b>Cód. Aluno:</b>" + data[0].COD_ALUNO);
                 $("#nome_aluno_confirma").html("<b>Nome:</b>" + data[0].NOME_INICIAL + " " + data[0].NOME_FINAL);

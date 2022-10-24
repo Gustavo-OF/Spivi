@@ -15,7 +15,7 @@ if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
 
-$codUnidade = isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "00";
+$codUnidade = isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "01";
 
 use Model\Database;
 use Controller\ControllerFuncoes;
@@ -39,6 +39,7 @@ $rotas = new Rotas($controllerClienteSpivi,$controllerClienteUx,$controllerEvent
 
 // em producao trocar para $_server
 
+//$rotas->abrir($_SERVER);
 $rotas->abrir($_REQUEST);
 
 

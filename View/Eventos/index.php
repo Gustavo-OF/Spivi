@@ -51,15 +51,15 @@
 					<input class="form-control w-100" type="date" id="pesquisaDataInicio" value="" />
 					<label for="pesquisaDataInicio">&nbsp;Data inicio do evento:</label>
 					<div id="pesquisaDataInicioFeedback" class="invalid-feedback">
-        				Selecione uma data válida.
-      				</div>
+						Selecione uma data válida.
+					</div>
 				</div>
 				<div class="form-floating col-md-6 mt-2">
 					<input class="form-control w-100" type="date" id="pesquisaDataFim" value="" />
 					<label for="pesquisaDataFim">&nbsp;Data fim do evento:</label>
 					<div id="pesquisaDataFimFeedback" class="invalid-feedback">
-        				Selecione uma data válida.
-      				</div>
+						Selecione uma data válida.
+					</div>
 				</div>
 			</div>
 			<button type="button" id="botaoPesquisaUsuario" class="btn btn-primary">Buscar</button>
@@ -85,10 +85,9 @@
 						<th scope="col" class="text-center">#</th>
 						<th scope="col" class="text-center">Nome</th>
 						<th scope="col" class="text-center">Professor</th>
-						<th scope="col" class="text-center">Descrição</th>
 						<th scope="col" class="text-center">Data inicio</th>
 						<th scope="col" class="text-center">Data fim</th>
-						<!--<th scope="col" class="text-center">Editar</th>-->
+						<th scope="col" class="text-center">Editar</th>
 					</tr>
 				</thead>
 				<tbody id="resultadoPesquisaCliente">
@@ -137,7 +136,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-				<div>
+					<div>
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control" id="spivi-evento-nome" name="spivi-evento-nome">
 							<label for="spivi-evento-nome">Nome do evento</label>
@@ -155,10 +154,6 @@
 								<option value="0" selected>Escolha um professor...</option>
 							</select>
 							<label for="spivi-evento-professor">Professor</label>
-						</div>
-						<div class="form-floating mb-3">
-							<textarea class="form-control h-75" id="spivi-evento-descricao" name="spivi-evento-descricao"></textarea>
-							<label for="spivi-evento-descricao">Descrição</label>
 						</div>
 					</div>
 				</div>
@@ -199,48 +194,7 @@
 					Aguarde
 				</div>
 			</div>
-		</div>
-		<div class="modal-dialog modal-lg" role="document" style="height: fit-content;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"><b>Confirmar usuário</b></h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<h2 style="text-align: center;display:none" id="label-confirma">Tem certeza que deseja inserir este aluno?</h2>
-					<br />
-					<br />
-					<div class="loader" id="loading-confirma-aluno" style="margin: 0; position: center"></div>
-					<div class="divResultado" style="display: inline-flex;">
-						<div class="imagem" style="padding-right: 2.5rem;">
-							<img alt="imagem-aluno" id="foto-conf" style="max-width:200px; max-height: 200px;">
-						</div>
-						<div class="confirma-inclusao">
-
-							<h6 id="cod_aluno_confirma"></h6>
-							<h6 id="nome_aluno_confirma"></h6>
-							<h6 id="email_aluno_confirma" style="line-break: anywhere;"></h6>
-							<h6 id="cpf_aluno_confirma"></h6>
-							<h6 id="data_nasc_aluno_confirma"></h6>
-							<h6 id="plano_aluno_confirma"></h6>
-							<h6 id="deviceID" class="d-inline-flex"><b>ID do dispositivo: </b> <input type="number" id="numberDeviceId" class="form-control w-25" style="height:76%"> </h6>
-
-							<input type="hidden" id="genero">
-							<input type="hidden" id="endereco">
-							<input type="hidden" id="cidade">
-							<input type="hidden" id="celular">
-						</div>
-					</div>
-				</div>
-				<div class="alert alert-warning div-retorno" role="alert">
-					<b class="mensagem-retorno"></b>
-				</div>
-				<div class="modal-footer" style="margin-top: 5%">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" href="#modalAdicionaUsuario">Voltar</button>
-					<button type="button" class="btn btnUltra" id="btn-aplica-insercao">Inserir</button>
-				</div>
-			</div>
-		</div>
+		</div>>
 	</div>
 	<!-- Fim Modal Confirma alunos -->
 
@@ -274,73 +228,55 @@
 		<div class="modal-dialog modal-lg" role="document" style="height: fit-content;">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"><b>Editar informações do aluno</b></h5>
+					<h5 class="modal-title" id="exampleModalLabel"><b>Editar informações do evento</b></h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="div-edita">
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-nome" name="spivi-nome">
-							<label for="spivi-nome">Nome</label>
+							<input type="text" class="form-control" id="spivi-evento-edita-nome" name="spivi-evento-edita-nome">
+							<label for="spivi-evento-edita-nome">Nome</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-endereco" name="spivi-endereco">
-							<label for="spivi-endereco">Endereco</label>
+							<input type="datetime-local" class="form-control" id="spivi-evento-edita-data-inicio" name="spivi-evento-edita-data-inicio">
+							<label for="spivi-evento-edita-data-inicio">Data inicio</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-cidade" name="spivi-cidade">
-							<label for="spivi-cidade">Cidade</label>
+							<input type="text" class="form-control" id="spivi-evento-edita-professor" name="spivi-evento-edita-professor">
+							<label for="spivi-evento-edita-professor">Professor</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-cel" name="spivi-cel">
-							<label for="spivi-cel">Celular</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="email" class="form-control" id="spivi-email" name="spivi-email" disabled>
-							<label for="spivi-email">Email</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="text" disabled class="form-control" id="spivi-level" name="spivi-level">
-							<label for="spivi-level">Level</label>
-						</div>
-						<div class="form-floating mb-3" style="padding-bottom: 1rem;">
-							<input type="text" class="form-control" id="spivi-ftp" name="spivi-ftp">
-							<label for="spivi-ftp">FTP</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-lthr" name="spivi-lthr">
-							<label for="spivi-lthr">LTHR</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="number" class="form-control" id="spivi-peso" name="spivi-peso">
-							<label for="spivi-peso">Peso (KG)</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="number" class="form-control" id="spivi-altura" name="spivi-altura">
-							<label for="spivi-altura">Altura (cm)</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-rhr" name="spivi-rhr">
-							<label for="spivi-rhr">RHR</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="spivi-pst" name="spivi-pst">
-							<label for="spivi-pst">PST</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="number" class="form-control" id="spivi-device-id" name="spivi-device">
-							<label for="spivi-device-id">ID do dispositivo</label>
+							<input type="datetime-local" class="form-control" id="spivi-evento-edita-data-fim" name="spivi-evento-edita-data-fim">
+							<label for="spivi-evento-edita-data-fim">Data fim</label>
 						</div>
 					</div>
-					<!-- <div class="form-floating mb-3">
-						<textarea class="form-control" id="spivi-anotacoes" rows="3"></textarea>
-						<label for="spivi-anotacoes">Anotações</label>
-					</div> -->
+					<div class="card table-responsive" style="height: 500px">
+						<div class="card-header headerResponsive">
+							<h6 class="panel-title txt-dark" id="labelVagas"></h6>
+						</div>
+						<div class="tabelaAlunosEvento card-body">
+							<table class="table table-hover" id="tabelaVagas">
+								<thead>
+									<tr>
+										<th scope="col" class="text-center">#</th>
+										<th scope="col" class="text-center">Nome</th>
+										<th scope="col" class="text-center">Email</th>
+										<th scope="col" class="text-center">ID da vaga</th>
+										<th scope="col" class="text-center">Remover</th>
+									</tr>
+								</thead>
+								<tbody id="resultadoPesquisaClienteEvento">
+
+								</tbody>
+							</table>
+						</div>
+					</div>
 					<div class="alert alert-warning div-retorno" role="alert">
 						<b class="mensagem-retorno"></b>
 					</div>
+					<input type="hidden" id="eventoID">
 					<div class="modal-footer mt-1 d-flex justify-content-between" style="padding-left: 0;padding-right:0">
-						<button type="button" class="btn btn-danger" id="deleta-cliente">Excluir aluno</button>
+						<button type="button" class="btn btn-danger" id="deleta-evento">Excluir evento</button>
 						<button type="button" class="btn btnUltra" id="btn-aplica-atualizacao" disabled>Atualizar</button>
 					</div>
 				</div>

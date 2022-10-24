@@ -41,6 +41,13 @@ class Rotas
         $json = file_get_contents('php://input');
         $obj = json_decode($json);
 
+        //$req['url'] = explode("/ControlGym/View/Spivi/",$req['SCRIPT_URL']);
+
+        // if(isset($req['url'][1])){
+        //     $url = explode("/", $req['url'][1]);    
+        // }else{
+        //     $url = "";
+        // }
         if(isset($req['url'])){
             $url = explode("/", $req['url']);    
         }else{
@@ -100,8 +107,17 @@ class Rotas
                             case 'pesquisa_evento':
                                 echo $this->controllerEventoSpivi->getEvents($_GET);
                             break;
+                            case 'pesquisa_evento_id':
+                                echo $this->controllerEventoSpivi->getEventsById($_GET);
+                            break;
                             case 'insere_evento':
                                 echo $this->controllerEventoSpivi->addEvent($_POST);
+                            break;
+                            case 'deleta_evento':
+                                echo $this->controllerEventoSpivi->deleteEvent($_POST);
+                            break;
+                            case 'remove_usuario_evento':
+                                echo $this->controllerEventoSpivi->removeClientFromEvent($_POST);
                             break;
                             default:
                                 include __DIR__."/../View/Eventos/index.php";
