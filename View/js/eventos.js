@@ -53,6 +53,7 @@ function atualizaTabela(data,idEvent){
 }
 
 $(document).ready(function () {
+    var clientes = [];
 
     $("#spivi-evento-data-inicial").change(function () {
         if ($(this).val().length > 0) {
@@ -182,6 +183,35 @@ $(document).ready(function () {
                 console.log(xhr.responseText);
             }
         })
+    });
+
+    $("#btnProcuraCliente").click(function(){
+        $("#autocompleteClient").css("visibility","visible");
+    });
+
+    $("#autocompleteClient").keydown(function(){
+        var clientes = [];
+        if($(this).val().length >= 3){
+            $.ajax({
+                url: 'usuarios/pesquisa_nome',
+                type: 'GET',
+                data: {
+                    valor: $(this).val()
+                },
+                success: function(data){
+                    console.log(data);
+                    data = JSON.parse(data);
+                    clientes.push(data);
+                },
+                complete: function(){
+                    
+                    $("#autocompleteClient").autocomplete({
+                        source: clientes
+                    });
+                }
+                
+            })
+        }
     });
 
     $("#btn-adiciona-evento").click(function () {

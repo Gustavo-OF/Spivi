@@ -251,8 +251,14 @@
 						</div>
 					</div>
 					<div class="card table-responsive" style="height: 500px">
-						<div class="card-header headerResponsive">
-							<h6 class="panel-title txt-dark" id="labelVagas"></h6>
+						<div class="card-header headerResponsive row">
+							<div class="col-6 pt-3">
+								<h6 class="panel-title txt-dark" id="labelVagas"></h6>
+							</div>
+							<div class="col-6 d-inline-flex" style="text-align:right">
+								<input type="text" class="form-control pr-1" id="autocompleteClient" style="visibility:hidden">
+								<img src="../View/images/icons/icon-add.png" id="btnProcuraCliente" style="cursor:pointer;width:40px;height:40px" />
+							</div>
 						</div>
 						<div class="tabelaAlunosEvento card-body">
 							<table class="table table-hover" id="tabelaVagas">
@@ -288,6 +294,7 @@
 <script type="text/javascript" src="../View/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../View/js/jquery-3.6.1.min.js?d=<?php echo uniqid() ?>"></script>
 <script type="text/javascript" src="../View/js/eventos.js?d=<?php echo uniqid() ?>"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="../View/js/loader.js"></script>
 
 </html>
