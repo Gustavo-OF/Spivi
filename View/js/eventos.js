@@ -191,7 +191,8 @@ $(document).ready(function () {
 
     $("#autocompleteClient").keydown(function(){
         var clientes = [];
-        if($(this).val().length >= 3){
+        let i = 0;
+        if($(this).val().length >= 3 && i == 0){
             $.ajax({
                 url: 'usuarios/pesquisa_nome',
                 type: 'GET',
@@ -201,7 +202,9 @@ $(document).ready(function () {
                 success: function(data){
                     console.log(data);
                     data = JSON.parse(data);
-                    clientes.push(data);
+                    for(let i = 0; i < data.Client.length;i++){
+                        clientes.push({"label": data.Client[i].DisplayName,"value": data.Client[i].ClientID});
+                    }
                 },
                 complete: function(){
                     
@@ -211,6 +214,7 @@ $(document).ready(function () {
                 }
                 
             })
+            i++
         }
     });
 

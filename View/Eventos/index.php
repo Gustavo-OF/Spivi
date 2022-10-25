@@ -10,6 +10,15 @@
 	<link rel="stylesheet" type="text/css" href="../View/css/style_v2.css">
 	<link rel="stylesheet" href="../View/css/style_loader.css">
 	<title>Eventos - Spivi</title>
+	<style>
+		#autocompleteClient{
+			position: relative;
+			z-index: 10000;
+		}
+		.ui-autocomplete {
+			z-index: 9999 !important;
+		}
+	</style>
 </head>
 
 <body style="margin:1rem">
