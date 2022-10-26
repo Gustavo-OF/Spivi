@@ -116,6 +116,9 @@ class Rotas
                             case 'deleta_evento':
                                 echo $this->controllerEventoSpivi->deleteEvent($_POST);
                             break;
+                            case 'adiciona_aluno_evento':
+                                echo $this->controllerEventoSpivi->AddClientsToEvents($_POST);
+                            break;
                             case 'remove_usuario_evento':
                                 echo $this->controllerEventoSpivi->removeClientFromEvent($_POST);
                             break;

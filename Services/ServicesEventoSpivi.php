@@ -102,6 +102,25 @@ class ServicesEventoSpivi extends Spivi{
         return $results;
     }
 
+    public function addClientsToEvents(int $idEvento, int $idCliente, int $idVaga) : object
+    {
+        $this->authSpivi();
+
+        $params = [
+            "ClientIDs" => [$idCliente],
+            "EventIDs" => [$idEvento],
+            "SeatIDs" => [$idVaga]
+        ];
+
+        $request = array_merge(array("SourceCredentials"=>$this->getSourceCredentials()),$params);
+        
+        $results = $this->getFuncoes()->formataRetorno($this->getPest()->post('EventService/AddClientsToEvents',$request));
+
+        $this->unsetSpivi();
+
+        return $results;
+    }
+
     public function removeClientFromEvent(int $idEvento, int $idCliente) : object
     {
         $this->authSpivi();

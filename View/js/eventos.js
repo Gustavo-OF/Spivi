@@ -12,6 +12,31 @@ function formataData(data){
     return dataFormatada;
 }
 
+function adicionaAluno(idClient, idVaga, idEvento)
+{
+    $.ajax({
+        url: "eventos/adiciona_aluno_evento",
+        type: "POST",
+        data:{
+            idCliente: idClient,
+            idVaga: (idVaga-1),
+            idEvento: idEvento
+        },
+        beforeSend: function () {
+            document.getElementById("loadingModel").className = "loading_v";
+        },
+        success: function (data) {
+            
+            document.getElementById("loadingModel").className = "loading_b";
+            window.location.reload();
+        },
+        error: function (xhr, status, error) {
+            document.getElementById("loadingModel").className = "loading_b";
+            console.log(xhr.responseText);
+        }
+    });
+}
+
 function atualizaTabela(data,idEvent){
     let dataIni = formataData(data.Event.StartDateTime);
     let dataFim = formataData(data.Event.EndDateTime);
@@ -186,35 +211,45 @@ $(document).ready(function () {
     });
 
     $("#btnProcuraCliente").click(function(){
-        $("#autocompleteClient").css("visibility","visible");
+        $("#pesquisaAluno").css("visibility","visible");
     });
 
-    $("#autocompleteClient").keydown(function(){
+    $("#pesquisaAluno").keyup(function(){
         var clientes = [];
-        let i = 0;
-        if($(this).val().length >= 3 && i == 0){
+        if($(this).val().length >= 3){
             $.ajax({
                 url: 'usuarios/pesquisa_nome',
                 type: 'GET',
                 data: {
                     valor: $(this).val()
                 },
+                beforeSend:function(){
+                    $("#pesquisaAluno").prop("disabled",true)
+                },
                 success: function(data){
-                    console.log(data);
+                    let number =$("#labelVagas").html();
+                    let res = number.replace(/\D/g, "");
                     data = JSON.parse(data);
                     for(let i = 0; i < data.Client.length;i++){
-                        clientes.push({"label": data.Client[i].DisplayName,"value": data.Client[i].ClientID});
+                        clientes.push({"label": data.Client[i].DisplayName+" - "+data.Client[i].Email,"value": data.Client[i].ClientID,"vaga":res});
                     }
                 },
+                error: function(xhr,status,error){
+                    $("#pesquisaAluno").prop("disabled",false);
+                },
                 complete: function(){
-                    
-                    $("#autocompleteClient").autocomplete({
-                        source: clientes
+                    let idEvento = $("#eventoID").val();
+                    $("#pesquisaAluno").autocomplete({
+                        source: clientes,
+                        select: function(e, i){
+                           adicionaAluno(i.item.value,i.item.vaga,idEvento)
+                        }
                     });
-                }
+                    $("#pesquisaAluno").autocomplete("search");
+                    $("#pesquisaAluno").prop("disabled",false);
+                }   
                 
             })
-            i++
         }
     });
 
@@ -301,6 +336,7 @@ $(document).ready(function () {
                             idEvento: idEvent
                         },
                         success: function(data){
+                            window.location.reload();
                             console.log(data);
                         },
                         error: function(xhr,status,error){

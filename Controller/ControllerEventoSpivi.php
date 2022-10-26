@@ -48,6 +48,18 @@ class ControllerEventoSpivi{
         return json_encode(["Code" => 200, "Message" => "Evento deletado com sucesso."]);
     }
 
+    public function AddClientsToEvents(array $params)
+    {
+        $idEvento = $params['idEvento'];
+        $idCliente = $params['idCliente'];
+        $idVaga = $params['idVaga'];
+
+        $adicionaAlunoEvento = $this->serviceEventoSpivi->addClientsToEvents($idEvento,$idCliente,$idVaga);
+
+        return json_encode(["Code" => 200, "Message" => "Aluno adicionado com sucesso."]);
+
+    }
+
     public function removeClientFromEvent(array $params){
         $idEvento = $params['idEvento'];
         $idCliente = $params['idCliente'];

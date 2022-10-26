@@ -9,9 +9,11 @@
 	<link href="../View/css/eventos.css?d=<?php echo uniqid() ?>" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../View/css/style_v2.css">
 	<link rel="stylesheet" href="../View/css/style_loader.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
 	<title>Eventos - Spivi</title>
 	<style>
-		#autocompleteClient{
+		#pesquisaCliente{
 			position: relative;
 			z-index: 10000;
 		}
@@ -22,7 +24,7 @@
 </head>
 
 <body style="margin:1rem">
-	<input type="hidden" id="codUnidade" value=<?php echo isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "00"; ?>>
+	<input type="hidden" id="codUnidade" value=<?php echo "99"; //isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "00"; ?>>
 	<div id="loading" name="loading" class="loading_b">
 		<div class="loader-wrapper">
 			<div class="loaderA">
@@ -264,8 +266,8 @@
 							<div class="col-6 pt-3">
 								<h6 class="panel-title txt-dark" id="labelVagas"></h6>
 							</div>
-							<div class="col-6 d-inline-flex" style="text-align:right">
-								<input type="text" class="form-control pr-1" id="autocompleteClient" style="visibility:hidden">
+							<div class="col-6 d-inline-flex ui-widget" style="text-align:right">
+								<input type="text" class="form-control pr-1" id="pesquisaAluno" style="visibility:hidden">
 								<img src="../View/images/icons/icon-add.png" id="btnProcuraCliente" style="cursor:pointer;width:40px;height:40px" />
 							</div>
 						</div>

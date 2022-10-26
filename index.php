@@ -15,7 +15,8 @@ if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
 
-$codUnidade = isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "01";
+//$codUnidade = isset($_SESSION['codUnidadeUser']) ? $_SESSION['codUnidadeUser'] : "01";
+$codUnidade = "99";
 
 use Model\Database;
 use Controller\ControllerFuncoes;
