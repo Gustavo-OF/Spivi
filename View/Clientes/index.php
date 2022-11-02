@@ -80,10 +80,8 @@
 						<th scope="col" class="text-center">Nome</th>
 						<th scope="col" class="text-center">Email</th>
 						<th scope="col" class="text-center">Level</th>
-						<th scope="col" class="text-center">FTP</th>
-						<th scope="col" class="text-center">LTHR</th>
-						<th scope="col" class="text-center">RHR</th>
-						<th scope="col" class="text-center" style="width:10%">ID do dispositivo</th>
+						<th scope="col" class="text-center">Pontos Spivi</th>
+						<th scope="col" class="text-center">Pontos Ultra</th>
 						<th scope="col" class="text-center">Editar</th>
 					</tr>
 				</thead>

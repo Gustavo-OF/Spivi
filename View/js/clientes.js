@@ -41,7 +41,7 @@ $(document).ready(function () {
                             } 
                             cor = data.Client[i].LevelName=="Bronze" ? "#cd7f32" : data.Client[i].LevelName;
                             linha = "<tr><th scope='row' class='text-center'>" + i + "</th><td class='text-center'>" + data.Client[i].DisplayName + "</td><td class='text-center'>" + data.Client[i].Email + "</td><td class='text-center' style='color:"+cor+"'>" + data.Client[i].LevelName + "</td>";
-                            linha = linha.concat("<td class='text-center'>" + data.Client[i].FTP + " BPM</td><td class='text-center'>" + data.Client[i].LTHR + " BPM</td><td class='text-center'>" + data.Client[i].RHR + " BPM</td><td class='text-center'>"+data.Client[i].DeviceID+"</td>");
+                            linha = linha.concat("<td class='text-center'>" + data.Client[i].TotalSEP + " P</td><td class='text-center'>" + data.Client[i].TotalWPP + " P</td>");
                             linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client[i].Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                             $("#tabelaResultadoPesquisa tbody").append(linha);
                         }
@@ -51,7 +51,7 @@ $(document).ready(function () {
                         } 
                         cor = data.Client.LevelName=="Bronze" ? "#cd7f32" : data.Client.LevelName;
                         linha = "<tr><th scope='row' class='text-center'>1</th><td class='text-center'>" + data.Client.DisplayName + "</td><td class='text-center'>" + data.Client.Email + "</td><td class='text-center' style='color:"+cor+"'>" + data.Client.LevelName + "</td>";
-                        linha = linha.concat("<td class='text-center'>" + data.Client.FTP + " BPM</td><td class='text-center'>" + data.Client.LTHR + " BPM</td><td class='text-center'>" + data.Client.RHR + " BPM</td><td class='text-center'>"+data.Client.DeviceID+"</td>");
+                        linha = linha.concat("<td class='text-center'>" + data.Client.TotalSEP + " P</td><td class='text-center'>" + data.Client.TotalWPP + " P</td>");
                         linha = linha.concat("<td class=text-center><img data-bs-toggle='modal' data-value='"+data.Client.Email+"' data-bs-target='#modal-edita-aluno' style='width:25px;cursor:pointer' src='../View/images/icons/pencil-square.svg'></i></td></tr>");
                         $("#tabelaResultadoPesquisa tbody").append(linha);
                     }

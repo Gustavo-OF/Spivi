@@ -278,7 +278,7 @@
 										<th scope="col" class="text-center">#</th>
 										<th scope="col" class="text-center">Nome</th>
 										<th scope="col" class="text-center">Email</th>
-										<th scope="col" class="text-center">ID da vaga</th>
+										<th scope="col" class="text-center">Frequêncimetro</th>
 										<th scope="col" class="text-center">Remover</th>
 									</tr>
 								</thead>
